@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior ="single">
+        <item
+            android:id="@+id/perfil"
+            android:title="Perfil"
+            android:icon="@drawable/ic_action_list"
+            />
+        <item android:title="Aulas" >
+            <menu>
+                <item
+                    android:id="@+id/aulas"
+                    android:title="Aulas"
+                    android:icon="@drawable/ic_action_grid"
+                    />
+                <item
+                    android:id="@+id/aulasmarcadas"
+                    android:title="Aulas Marcadas"
+                    android:icon="@drawable/ic_action_grid"
+                    />
+
+            </menu>
+        </item>
+        <item
+            android:id="@+id/planos"
+            android:title="Planos"
+            android:icon="@drawable/ic_action_grid"
+            />
+        <item
+            android:id="@+id/contadordeagua"
+            android:title="Água"
+            android:icon="@drawable/ic_action_grid"
+            />
+    </group>
+</menu>

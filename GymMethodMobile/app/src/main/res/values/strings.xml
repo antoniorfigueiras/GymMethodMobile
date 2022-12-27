@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GymMethodMobile</string>
+    <string name="txt_username_invalido">O username é inválido</string>
+    <string name="txt_password_invalida">A password está incorreta</string>
+</resources>
