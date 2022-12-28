@@ -9,6 +9,11 @@
             android:title="Perfil"
             android:icon="@drawable/ic_action_list"
             />
+        <item
+            android:id="@+id/planos"
+            android:title="Planos"
+            android:icon="@drawable/ic_action_grid"
+            />
         <item android:title="Aulas" >
             <menu>
                 <item
@@ -24,11 +29,7 @@
 
             </menu>
         </item>
-        <item
-            android:id="@+id/planos"
-            android:title="Planos"
-            android:icon="@drawable/ic_action_grid"
-            />
+
         <item
             android:id="@+id/contadordeagua"
             android:title="Água"

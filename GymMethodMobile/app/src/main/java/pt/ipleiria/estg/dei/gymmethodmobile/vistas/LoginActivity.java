@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.gymmethodmobile.vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -44,12 +45,12 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         // Criar o intent para iniciar uma atividade e passar como parametro o email
-        // Indicar a atividade Pai e a atividade a iniciar
-        //  Intent intent = new Intent(this, MenuMainActivity.class);
-        // Para enviar dados ao iniciar a atividade
-        //  intent.putExtra(EMAIL, email);
-        //  startActivity(intent);
-        //  finish(); // Para terminar a atividade currente
+         //Indicar a atividade Pai e a atividade a iniciar
+         Intent intent = new Intent(this, MenuMainActivity.class);
+         //Para enviar dados ao iniciar a atividade
+        startActivity(intent);
+          finish(); // Para terminar a atividade currente
+
     }
 
     // Verifica se o email introduzido é válido
