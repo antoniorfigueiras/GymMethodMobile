@@ -4,4 +4,8 @@
     <string name="txt_password_invalida">A password está incorreta</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_pesquisa">Pesquisar</string>
+    <string name="ndOpen">Open</string>
+    <string name="ndClose">Close</string>
+    <string name="default_email">Email nao identificado</string>
 </resources>
