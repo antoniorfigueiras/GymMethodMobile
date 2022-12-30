@@ -24,11 +24,11 @@ import com.google.android.material.navigation.NavigationView;
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
         private NavigationView navigationView;
         private DrawerLayout drawer;
-        private String email;
+        private String username;
         private String token;
         private FragmentManager fragmentManager;
         public static final String SHARED_USER="DADOS_USER"; // CHAVE
-        public static final String EMAIL="EMAIL"; // NOME
+        public static final String USERNAME="USERNAME"; // NOME
         public static final String OPERACAO="OPERACAO";
         public static final String PASSWORD="PASSWORD";
         public static final String TOKEN="TOKEN";
@@ -66,24 +66,24 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         }
 
         private void carregarCabecalho() {
-            email=getIntent().getStringExtra(EMAIL);
+            username=getIntent().getStringExtra(USERNAME);
             token= getIntent().getStringExtra(TOKEN);
             SharedPreferences infoUser=getSharedPreferences(SHARED_USER, Context.MODE_PRIVATE);
 
-            if(email!=null && token!=null)  {
+            if(username!=null && token!=null)  {
                 SharedPreferences.Editor editor =infoUser.edit();
-                editor.putString(EMAIL, email);
+                editor.putString(USERNAME, username);
                 editor.putString(TOKEN, token);
                 editor.apply();
             }
 
             else
-                email=infoUser.getString(EMAIL, getString(R.string.default_email));
+                username=infoUser.getString(USERNAME, getString(R.string.default_email));
 
-            if (email != null){
+            if (username != null){
                 View headerView = navigationView.getHeaderView(0);
                 TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
-                tvEmail.setText(email);
+                tvEmail.setText(username);
             }
 
         }

@@ -2,13 +2,14 @@
     <string name="app_name">GymMethodMobile</string>
     <string name="txt_username_invalido">O username é inválido</string>
     <string name="txt_password_invalida">A password está incorreta</string>
-<<<<<<< Updated upstream
-=======
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_pesquisa">Pesquisar</string>
     <string name="ndOpen">Open</string>
     <string name="ndClose">Close</string>
-    <string name="default_email">Email nao identificado</string>
->>>>>>> Stashed changes
+
+
+    <string name="default_email">Username nao identificado</string>
+
 </resources>
