@@ -21,14 +21,17 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
         private NavigationView navigationView;
         private DrawerLayout drawer;
-        private String username;
+        private String user;
         private String token;
         private FragmentManager fragmentManager;
         public static final String SHARED_USER="DADOS_USER"; // CHAVE
-        public static final String USERNAME="USERNAME"; // NOME
+        public static final String USER="USER"; // NOME
         public static final String OPERACAO="OPERACAO";
         public static final String PASSWORD="PASSWORD";
         public static final String TOKEN="TOKEN";
@@ -66,24 +69,30 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         }
 
         private void carregarCabecalho() {
-            username=getIntent().getStringExtra(USERNAME);
+            user=getIntent().getStringExtra(USER);
             token= getIntent().getStringExtra(TOKEN);
-            SharedPreferences infoUser=getSharedPreferences(SHARED_USER, Context.MODE_PRIVATE);
+            SharedPreferences infoUser = getSharedPreferences(SHARED_USER, Context.MODE_PRIVATE);
 
-            if(username!=null && token!=null)  {
+            if(user!=null && token!=null)  {
                 SharedPreferences.Editor editor =infoUser.edit();
-                editor.putString(USERNAME, username);
+                editor.putString(USER, user);
                 editor.putString(TOKEN, token);
                 editor.apply();
             }
 
             else
-                username=infoUser.getString(USERNAME, getString(R.string.default_email));
+                user=infoUser.getString(USER, getString(R.string.default_email));
 
-            if (username != null){
+            try {
+                JSONObject nome = new JSONObject(user);
+                user = nome.getString("nomeproprio");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (user != null){
                 View headerView = navigationView.getHeaderView(0);
                 TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
-                tvEmail.setText(username);
+                tvEmail.setText(user);
             }
 
         }

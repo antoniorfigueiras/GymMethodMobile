@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
@@ -80,11 +82,11 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
     // Iniciar atividade do menu depois do login
     @Override
-    public void onValidateLogin(String token, String username, Context context) {
+    public void onValidateLogin(String token, String user, Context context) {
         if (token!=null)
         {
             Intent intent = new Intent(this, MenuMainActivity.class);
-            intent.putExtra(MenuMainActivity.USERNAME, username);
+            intent.putExtra(MenuMainActivity.USER, user);
             intent.putExtra(MenuMainActivity.TOKEN, token);
             startActivity(intent);
             finish();

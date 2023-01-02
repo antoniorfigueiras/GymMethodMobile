@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.gymmethodmobile.modelos;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -16,7 +17,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +44,7 @@ public class SingletonGestorApp {
 
     private static final  String APIGetPlanos ="http://10.0.2.2/gymmethod/backend/web/api/plano/get-planos";
     private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/logint";
+
 
     public static synchronized SingletonGestorApp getInstance(Context context){
         if(instance == null)
@@ -128,9 +134,10 @@ public class SingletonGestorApp {
             StringRequest req = new StringRequest(Request.Method.GET, APILogin,  new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    String token = JsonParser.parserJsonLogin(response);
+                        String token = JsonParser.parserJsonLogin(response);
+                        String user = JsonParser.parserJsonUser(response).toString();
                     if (loginListener != null)
-                        loginListener.onValidateLogin(token, username, context);
+                        loginListener.onValidateLogin(token, user, context);
                 }
 
             }, new Response.ErrorListener() {
@@ -152,7 +159,7 @@ public class SingletonGestorApp {
         }
     }
 
-    public void getAllPlanosAPI(final Context context, String token){
+    public void getAllPlanosAPI(final Context context, String token, int user_id){
         if (!JsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
             if (planosListener!=null)
@@ -161,7 +168,7 @@ public class SingletonGestorApp {
             }
         }else
         {
-            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, APIGetPlanos+ "/"+107, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, APIGetPlanos+ "/"+ user_id, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     planos = PlanoJsonParser.parserJsonPlanos(response);

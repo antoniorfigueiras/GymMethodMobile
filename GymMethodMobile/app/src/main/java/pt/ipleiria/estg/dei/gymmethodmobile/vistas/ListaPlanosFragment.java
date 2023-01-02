@@ -23,6 +23,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
@@ -37,6 +40,8 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
     private SearchView searchView;
     public static final int ACT_DETALHES = 1;
     private String token;
+    private Integer user_id;
+    private String user;
     public ListaPlanosFragment() {
 
     }
@@ -48,6 +53,14 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
         lvLivros = view.findViewById(R.id.lvPlanos);
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
+        user = sharedPreferences.getString(MenuMainActivity.USER, null);
+        try {
+            JSONObject userInfo = new JSONObject(user);
+            user_id = userInfo.getInt("user_id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         /*lvLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -65,7 +78,7 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
             }
         )};*/
         SingletonGestorApp.getInstance(getContext()).setPlanosListener(this);
-        SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext(), token);
+        SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext(), token, user_id);
         return view;
     }
 
