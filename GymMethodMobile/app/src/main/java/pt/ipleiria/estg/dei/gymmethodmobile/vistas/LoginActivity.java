@@ -82,11 +82,12 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
     // Iniciar atividade do menu depois do login
     @Override
-    public void onValidateLogin(String token, String user, Context context) {
+    public void onValidateLogin(String token, Integer user_id, String username,Context context) {
         if (token!=null)
         {
             Intent intent = new Intent(this, MenuMainActivity.class);
-            intent.putExtra(MenuMainActivity.USER, user);
+            intent.putExtra(MenuMainActivity.USER_ID, user_id);
+            intent.putExtra(MenuMainActivity.USERNAME, username);
             intent.putExtra(MenuMainActivity.TOKEN, token);
             startActivity(intent);
             finish();

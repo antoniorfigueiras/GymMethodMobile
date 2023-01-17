@@ -53,22 +53,24 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
         lvLivros = view.findViewById(R.id.lvPlanos);
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
-        user = sharedPreferences.getString(MenuMainActivity.USER, null);
-        try {
+        user_id =  sharedPreferences.getInt(MenuMainActivity.USER_ID, 0);
+        user = sharedPreferences.getString(MenuMainActivity.USERNAME, null);
+        /*try {
             JSONObject userInfo = new JSONObject(user);
             user_id = userInfo.getInt("user_id");
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        /*lvLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Para selecionar um plano da lista
+        lvLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DetalhesLivroActivity.class);
+                Intent intent = new Intent(getContext(), ListaExerciciosPlanoActivity.class);
                 intent.putExtra("ID_LIVRO", (int) id);
                 startActivityForResult(intent, ACT_DETALHES);
             }
-        });*/
+        });
 
         /*fabLista.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +80,7 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
             }
         )};*/
         SingletonGestorApp.getInstance(getContext()).setPlanosListener(this);
-        SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext(), token, user_id);
+        SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext(), token);
         return view;
     }
 

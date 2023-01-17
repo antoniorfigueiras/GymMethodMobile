@@ -42,8 +42,9 @@ public class SingletonGestorApp {
     private ArrayList<Plano> planos;
     private BDHelper BD;
 
+    private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/login";
     private static final  String APIGetPlanos ="http://10.0.2.2/gymmethod/backend/web/api/plano/get-planos";
-    private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/logint";
+    private static final  String APIGetExerciciosPlano ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicios-plano/";
 
 
     public static synchronized SingletonGestorApp getInstance(Context context){
@@ -81,7 +82,7 @@ public class SingletonGestorApp {
         return null;
     }
 
-    public void adicionarLivroBD(Plano p)
+    public void adicionarPlanoBD(Plano p)
     {
         BD.adicionarPlanoBD(p);
     }
@@ -91,41 +92,11 @@ public class SingletonGestorApp {
         BD.removerAllPlanos();
         for(Plano p : planos)
         {
-            adicionarLivroBD(p);
+            adicionarPlanoBD(p);
         }
     }
 
     //endregion
-    /*public void loginAPI(final String username, final String password, final Context context){
-        if (!JsonParser.isConnectionInternet(context)){
-            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
-        }else
-        {
-            StringRequest req = new StringRequest(Request.Method.GET, APILogin+ "/" + username + "/" + password,  new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    String token = JsonParser.parserJsonLogin(response);
-                    if (loginListener != null)
-                        loginListener.onValidateLogin(token, username, context);
-                }
-
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.d("LOGIN: Error" + error.getMessage());
-                }
-            });/*{
-                @Override
-                public Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("username", username);
-                    params.put("password", password);
-                    return params;
-                }
-            };*
-            volleyQueue.add(req);
-        }
-    }*/
     public void loginAPI(final String username, final String password, final Context context){
         if (!JsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
@@ -135,14 +106,17 @@ public class SingletonGestorApp {
                 @Override
                 public void onResponse(String response) {
                         String token = JsonParser.parserJsonLogin(response);
-                        String user = JsonParser.parserJsonUser(response).toString();
+                        Integer user_id = JsonParser.parserJsonUser_id(response);
+                        String username = JsonParser.parserJsonUsername(response);
+
                     if (loginListener != null)
-                        loginListener.onValidateLogin(token, user, context);
+                        loginListener.onValidateLogin(token, user_id, username, context);
                 }
 
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, "Username ou password incorreto", Toast.LENGTH_LONG).show();
                     VolleyLog.d("LOGIN: Error" + error.getMessage());
                 }
             }) {
@@ -159,7 +133,7 @@ public class SingletonGestorApp {
         }
     }
 
-    public void getAllPlanosAPI(final Context context, String token, int user_id){
+    public void getAllPlanosAPI(final Context context, String token){
         if (!JsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
             if (planosListener!=null)
@@ -168,7 +142,7 @@ public class SingletonGestorApp {
             }
         }else
         {
-            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, APIGetPlanos+ "/"+ user_id, null, new Response.Listener<JSONArray>() {
+                JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetPlanos + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     planos = PlanoJsonParser.parserJsonPlanos(response);
@@ -184,16 +158,43 @@ public class SingletonGestorApp {
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
-            }){
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<>();
-                    headers.put("Content-Type", "application/json");
-                    headers.put("Authorization", "Basic " + token);
-                    return headers;
-                }
-            };
+            });
+
             volleyQueue.add(req);
         }
     }
+
+    public void getExerciciosPlanoAPI(final Context context, String token, int plano_id){
+        if (!JsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (planosListener!=null)
+            {
+                planosListener.onRefreshListaPlanos(BD.getAllPlanosBD());
+            }
+        }else
+        {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetExerciciosPlano + plano_id + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    planos = PlanoJsonParser.parserJsonPlanos(response);
+                    adicionarPlanosBD(planos);
+
+                    if (planosListener!=null)
+                    {
+                        planosListener.onRefreshListaPlanos(planos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
+
+
 }
