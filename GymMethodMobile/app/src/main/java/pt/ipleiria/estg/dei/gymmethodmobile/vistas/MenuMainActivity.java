@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.vistas;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,14 +22,19 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
         private NavigationView navigationView;
         private DrawerLayout drawer;
-        private String email;
+        private Integer user_id;
         private String token;
+        private String username;
         private FragmentManager fragmentManager;
         public static final String SHARED_USER="DADOS_USER"; // CHAVE
-        public static final String EMAIL="EMAIL"; // NOME
+        public static final String USER_ID="ID"; // ID
+        public static final String USERNAME="USER"; // NOME
         public static final String OPERACAO="OPERACAO";
         public static final String PASSWORD="PASSWORD";
         public static final String TOKEN="TOKEN";
@@ -66,24 +72,32 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         }
 
         private void carregarCabecalho() {
-            email=getIntent().getStringExtra(EMAIL);
+            user_id = getIntent().getIntExtra(USER_ID, 0);
+            username = getIntent().getStringExtra(USERNAME);
             token= getIntent().getStringExtra(TOKEN);
-            SharedPreferences infoUser=getSharedPreferences(SHARED_USER, Context.MODE_PRIVATE);
+            SharedPreferences infoUser = getSharedPreferences(SHARED_USER, Context.MODE_PRIVATE);
 
-            if(email!=null && token!=null)  {
+            if(username!=null && token!=null)  {
                 SharedPreferences.Editor editor =infoUser.edit();
-                editor.putString(EMAIL, email);
+                editor.putInt(USER_ID, user_id);
+                editor.putString(USERNAME, username);
                 editor.putString(TOKEN, token);
                 editor.apply();
             }
 
             else
-                email=infoUser.getString(EMAIL, getString(R.string.default_email));
+                username=infoUser.getString(USERNAME, getString(R.string.default_email));
 
-            if (email != null){
+            /*try {
+                JSONObject nome = new JSONObject(username);
+                username = nome.getString("nomeproprio");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }*/
+            if (username != null){
                 View headerView = navigationView.getHeaderView(0);
                 TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
-                tvEmail.setText(email);
+                tvEmail.setText(username);
             }
 
         }

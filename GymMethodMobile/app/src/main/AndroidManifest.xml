@@ -16,12 +16,17 @@
         android:theme="@style/Theme.GymMethodMobile"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ListaExerciciosPlanoActivity"
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/circle" />
 
         <activity
             android:name=".AguaActivity"
+
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -41,6 +46,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".vistas.ListaPlanosFragment"
             android:exported="false">

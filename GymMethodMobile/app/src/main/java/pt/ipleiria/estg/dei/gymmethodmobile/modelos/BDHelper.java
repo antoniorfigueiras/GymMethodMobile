@@ -13,7 +13,11 @@ public class BDHelper extends SQLiteOpenHelper {
     private static final String DB_NAME="bdGym";
     private static final int DB_VERSION=1;
     private static final String TABLE_PLANOS ="planos";
+    private static final String TABLE_EXERCICIOS_PLANO  ="exercicios_plano";
+    //Table Plano
     private static final String ID="id", NOME="nome", TREINADOR="treinador";
+    //Table Exercicios Plano
+    private static final String EXERCICIO_ID="id", PLANO_ID="plano_id", NOME_EXERCICIO="nome", EQUIPAMENTO="equipamento", TIPO_EXERCICIO="tipo_exercicio";
     private final SQLiteDatabase db;
     public BDHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -28,7 +32,15 @@ public class BDHelper extends SQLiteOpenHelper {
                 TREINADOR  + " TEXT NOT NULL " +
                 ")";
         sqLiteDatabase.execSQL(sqlCreateTablePlanos);
+
+        String sqlCreateTableExerciciosPlano ="CREATE TABLE " + TABLE_EXERCICIOS_PLANO + "(" +
+                EXERCICIO_ID + " INTEGER  PRIMARY KEY, " +
+                PLANO_ID  + " INTEGER FOREIGN KEY, " +
+                TREINADOR  + " TEXT NOT NULL " +
+                ")";
+        sqLiteDatabase.execSQL(sqlCreateTableExerciciosPlano);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
@@ -37,7 +49,7 @@ public class BDHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    // CRUD
+    //region CRUD Planos
 
     public Plano adicionarPlanoBD(Plano plano)
     {
@@ -68,7 +80,7 @@ public class BDHelper extends SQLiteOpenHelper {
 
     }
 
-    public Boolean removerLivroBD(int id)
+    public Boolean removerPlanoBD(int id)
     {
         // db.delete
         return db.delete(TABLE_PLANOS,ID+"=?", new String[]{id+""})==1;
@@ -92,4 +104,6 @@ public class BDHelper extends SQLiteOpenHelper {
         }
         return planos;
     }
+
+    //endregion
 }

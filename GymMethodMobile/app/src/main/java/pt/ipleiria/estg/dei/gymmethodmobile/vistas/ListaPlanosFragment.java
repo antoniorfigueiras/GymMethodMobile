@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +23,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
@@ -34,7 +39,9 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
     private ListView lvLivros;
     private SearchView searchView;
     public static final int ACT_DETALHES = 1;
-
+    private String token;
+    private Integer user_id;
+    private String user;
     public ListaPlanosFragment() {
 
     }
@@ -44,15 +51,26 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
         View view = inflater.inflate(R.layout.fragment_lista_planos, container, false);
         setHasOptionsMenu(true);
         lvLivros = view.findViewById(R.id.lvPlanos);
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
+        token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
+        user_id =  sharedPreferences.getInt(MenuMainActivity.USER_ID, 0);
+        user = sharedPreferences.getString(MenuMainActivity.USERNAME, null);
+        /*try {
+            JSONObject userInfo = new JSONObject(user);
+            user_id = userInfo.getInt("user_id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
 
-        /*lvLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Para selecionar um plano da lista
+        lvLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DetalhesLivroActivity.class);
+                Intent intent = new Intent(getContext(), ListaExerciciosPlanoActivity.class);
                 intent.putExtra("ID_LIVRO", (int) id);
                 startActivityForResult(intent, ACT_DETALHES);
             }
-        });*/
+        });
 
         /*fabLista.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +80,7 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
             }
         )};*/
         SingletonGestorApp.getInstance(getContext()).setPlanosListener(this);
-        SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext());
+        SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext(), token);
         return view;
     }
 
