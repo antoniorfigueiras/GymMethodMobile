@@ -47,6 +47,7 @@ public class SingletonGestorApp {
     private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/login";
     private static final  String APIGetPlanos ="http://10.0.2.2/gymmethod/backend/web/api/plano/get-planos";
     private static final  String APIGetExerciciosPlano ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicios-plano/";
+    private static final String APIGetPerfil="http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
 
     private static final  String APIGetExercicioDetalhes ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicio-detalhes/";
 
