@@ -18,6 +18,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,28 +42,67 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                />
+                android:layout_height="20dp"
+                android:layout_weight="1" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvDescricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrição:"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvDescricaoTexto"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:text="null" />
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvSeries"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nome"
+                    android:text="Séries:"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNome"
+                    android:id="@+id/tvNSeries"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:text="Nome" />
+                    android:gravity="center"
+                    android:text="null" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvSeriesCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Séries pessoais:"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/tvNSeriesCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -63,42 +110,84 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvRepeticoes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nome"
+                    android:text="Repetições:"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNome"
+                    android:id="@+id/tvNRepeticoes"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:text="Nome" />
+                    android:gravity="center"
+                    android:text="null" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvRepeticoesCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Repetições pessoais:"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/tvNRepeticoesCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:inputType="number" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvPeso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nome"
+                    android:text="Peso:"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNome"
+                    android:id="@+id/tvNPeso"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:text="Nome" />
+                    android:gravity="center"
+                    android:text="null" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvPesoCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Peso pessoal:"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/tvNPesoCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -110,20 +199,38 @@
                 >
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvTempo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nome"
-                    android:textStyle="bold"
+                    android:text="Tempo:"
+                    android:textStyle="bold" />
 
-                    />
 
                 <TextView
-                    android:id="@+id/tvNome"
+                    android:id="@+id/tvNTempo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:text="Nome" />
+                    android:text="null"
+                    android:gravity="center"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvTempoCLiente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tempo pessoal:"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/tvNTempoCLiente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp" />
 
             </LinearLayout>
 
