@@ -23,12 +23,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
-import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesListener;
+import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Exercicio;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.SingletonGestorApp;
-import pt.ipleiria.estg.dei.gymmethodmobile.vistas.MenuMainActivity;
 
-public class DetalhesExercicioActivity extends AppCompatActivity implements DetalhesListener {
+public class DetalhesExercicioActivity extends AppCompatActivity implements DetalhesExercicioListener {
 
     private Exercicio exercicio;
     private String token;

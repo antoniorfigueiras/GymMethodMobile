@@ -1,6 +1,6 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.listeners;
 
-public interface DetalhesListener {
+public interface DetalhesExercicioListener {
 
     void onRefreshDetalhes(int operacao);
 
