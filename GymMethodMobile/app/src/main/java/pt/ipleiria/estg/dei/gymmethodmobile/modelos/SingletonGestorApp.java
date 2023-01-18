@@ -29,6 +29,7 @@ import java.util.Map;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.PerfilJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PlanoJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.vistas.MenuMainActivity;
 
@@ -40,11 +41,13 @@ public class SingletonGestorApp {
     private PlanosListener planosListener;
 
     private ArrayList<Plano> planos;
+    private User perfil;
     private BDHelper BD;
 
     private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/login";
     private static final  String APIGetPlanos ="http://10.0.2.2/gymmethod/backend/web/api/plano/get-planos";
     private static final  String APIGetExerciciosPlano ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicios-plano/";
+    private static final String APIGetPerfil="http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
 
 
     public static synchronized SingletonGestorApp getInstance(Context context){
@@ -129,6 +132,26 @@ public class SingletonGestorApp {
                     return headers;
                 }
             };
+            volleyQueue.add(req);
+        }
+    }
+
+    public void getPerfilAPI(final Context context, String token) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            StringRequest req = new StringRequest(Request.Method.GET, APIGetPerfil + "?access-token=" + token ,  new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    perfil = PerfilJsonParser.parserJsonPerfil(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
             volleyQueue.add(req);
         }
     }
