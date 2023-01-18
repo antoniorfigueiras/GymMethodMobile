@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Exercicio;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Plano;
 
 
@@ -30,7 +31,27 @@ public class PlanoJsonParser {
         return planos;
     }
 
-    public static Plano parserJsonPlano(String response) {
+    public static ArrayList<Exercicio> parserJsonExercicios(JSONArray response) {
+        ArrayList<Exercicio> exercicios = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject exercicio = (JSONObject) response.get(i);
+                int id = exercicio.getInt("id");
+                int plano_id = exercicio.getInt("plano_id");
+                String nome = exercicio.getString("nome");
+                String equipamento = exercicio.getString("equipamento");
+                String tipo_exercicio = exercicio.getString("tipo_exercicio");
+
+                Exercicio auxExercicio = new Exercicio(id, plano_id, nome, equipamento, tipo_exercicio);
+                exercicios.add(auxExercicio);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return exercicios;
+    }
+
+    /*public static Plano parserJsonPlano(String response) {
         Plano auxPlano = null;
         try {
             JSONObject plano = new JSONObject(response);
@@ -43,7 +64,7 @@ public class PlanoJsonParser {
             e.printStackTrace();
         }
         return auxPlano;
-    }
+    }*/
 
 
 }
