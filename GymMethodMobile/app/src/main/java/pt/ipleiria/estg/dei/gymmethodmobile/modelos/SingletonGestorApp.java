@@ -112,8 +112,8 @@ public class SingletonGestorApp {
 
     //region Exercicios
 
-    public ArrayList<Exercicio> getExerciciosBD() {
-        exercicios = BD.getAllExerciciosBD();
+    public ArrayList<Exercicio> getExerciciosBD(int plano_id) {
+        exercicios = BD.getAllExerciciosBD(plano_id);
         return new ArrayList(exercicios);
     }
 
@@ -132,7 +132,7 @@ public class SingletonGestorApp {
 
     public void adicionarExerciciosBD(ArrayList<Exercicio> exercicios)
     {
-        BD.removerAllExercicios();
+        //BD.removerAllExercicios();
         for(Exercicio e : exercicios)
         {
             adicionarExercicioBD(e);
@@ -232,7 +232,7 @@ public class SingletonGestorApp {
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
             if (exerciciosPlanoListener!=null)
             {
-                exerciciosPlanoListener.onRefreshListaExercicios(BD.getAllExerciciosBD());
+                exerciciosPlanoListener.onRefreshListaExercicios(BD.getAllExerciciosBD(plano_id));
             }
         }else
         {

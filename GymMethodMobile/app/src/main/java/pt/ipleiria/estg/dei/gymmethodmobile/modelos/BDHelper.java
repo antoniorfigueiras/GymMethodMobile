@@ -153,14 +153,15 @@ public class BDHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_EXERCICIOS_PLANO,ID+"=?", new String[]{id+""})==1;
     }
 
-    public void removerAllExercicios()
+    /*public void removerAllExercicios()
     {
         db.delete(TABLE_EXERCICIOS_PLANO, null, null);
-    }
+    }*/
 
-    public ArrayList<Exercicio> getAllExerciciosBD(){
+    public ArrayList<Exercicio> getAllExerciciosBD(int plano_id){
         ArrayList<Exercicio> exercicios = new ArrayList<>();
-        Cursor cursor = db.query(TABLE_EXERCICIOS_PLANO, new String[]{ID, PLANO_ID, NOME_EXERCICIO, EQUIPAMENTO, TIPO_EXERCICIO}, null, null, null, null, null);
+        //Cursor cursor = db.query(TABLE_EXERCICIOS_PLANO,new String[]{ID, PLANO_ID, NOME_EXERCICIO, EQUIPAMENTO, TIPO_EXERCICIO}, null, null, null, null, null);
+        Cursor cursor = db.rawQuery( "select * from "+TABLE_EXERCICIOS_PLANO+" WHERE "+PLANO_ID+" = "+plano_id+"", null, null );
         if(cursor.moveToFirst()){
             do {
                 Exercicio auxExercicio = new Exercicio(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3),  cursor.getString(4));// ID, PLANO_ID, NOME_EXERCICIO, EQUIPAMENTO, TIPO_EXERCICIO
