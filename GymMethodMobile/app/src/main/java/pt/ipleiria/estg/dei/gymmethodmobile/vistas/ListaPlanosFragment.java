@@ -36,9 +36,9 @@ import pt.ipleiria.estg.dei.gymmethodmobile.modelos.SingletonGestorApp;
 
 public class ListaPlanosFragment extends Fragment implements PlanosListener {
 
-    private ListView lvLivros;
+    private ListView lvPlanos;
     private SearchView searchView;
-    public static final int ACT_DETALHES = 1;
+    public static final int ACT_EXERCICIOS = 1;
     private String token;
     private Integer user_id;
     private String user;
@@ -50,44 +50,31 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_planos, container, false);
         setHasOptionsMenu(true);
-        lvLivros = view.findViewById(R.id.lvPlanos);
+        lvPlanos = view.findViewById(R.id.lvPlanos);
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
-        user_id =  sharedPreferences.getInt(MenuMainActivity.USER_ID, 0);
-        user = sharedPreferences.getString(MenuMainActivity.USERNAME, null);
-        /*try {
-            JSONObject userInfo = new JSONObject(user);
-            user_id = userInfo.getInt("user_id");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
+
+
 
         // Para selecionar um plano da lista
-        lvLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvPlanos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), ListaExerciciosPlanoActivity.class);
-                intent.putExtra("ID_LIVRO", (int) id);
-                startActivityForResult(intent, ACT_DETALHES);
+                intent.putExtra("PLANO_ID", (int) id);
+                startActivityForResult(intent, ACT_EXERCICIOS);
             }
         });
 
-        /*fabLista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DetalhesLivroActivity.class);
-                startActivityForResult(intent, ACT_DETALHES);
-            }
-        )};*/
         SingletonGestorApp.getInstance(getContext()).setPlanosListener(this);
         SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext(), token);
         return view;
     }
 
-   /* @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
         if (resultCode== Activity.RESULT_OK && requestCode==ACT_DETALHES){
-            SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext()); // quando sai dos detalhes e volta a lsta
+            SingletonGestorApp.getInstance(getContext()).getAllPlanosAPI(getContext(), token); // quando sai dos detalhes e volta a lsta
 
             switch (intent.getIntExtra(MenuMainActivity.OPERACAO, 0)){
                 case MenuMainActivity.ADD:
@@ -124,7 +111,7 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
                     {
                         tempLista.add(p);
                     }
-                    lvLivros.setAdapter(new ListaPlanosAdaptador(getContext(), tempLista));
+                    lvPlanos.setAdapter(new ListaPlanosAdaptador(getContext(), tempLista));
                 }
                 return true;
 
@@ -148,7 +135,7 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
     @Override
     public void onRefreshListaPlanos(ArrayList<Plano> listaPlanos) {
         if(listaPlanos != null){
-            lvLivros.setAdapter(new ListaPlanosAdaptador(getContext(), listaPlanos));
+            lvPlanos.setAdapter(new ListaPlanosAdaptador(getContext(), listaPlanos));
         }
     }
 }

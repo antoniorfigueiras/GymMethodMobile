@@ -5,41 +5,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
-import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Plano;
+import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Exercicio;
 
-public class ListaPlanosAdaptador extends BaseAdapter {
+public class ListaExerciciosAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<Plano> planos;
+    private ArrayList<Exercicio> exercicios;
 
-    public ListaPlanosAdaptador(Context context, ArrayList<Plano> planos) {
+    public ListaExerciciosAdaptador(Context context, ArrayList<Exercicio> exercicios) {
         this.context = context;
-        this.planos = planos;
+        this.exercicios = exercicios;
     }
 
     @Override
     public int getCount() {
-        return planos.size();
+        return exercicios.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return planos.get(i);
+        return exercicios.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return planos.get(i).getId();
+        return exercicios.get(i).getId();
     }
 
     @Override
@@ -47,7 +43,7 @@ public class ListaPlanosAdaptador extends BaseAdapter {
         if(inflater == null)
             inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         if(view == null)
-            view = inflater.inflate(R.layout.item_lista_planos, null);
+            view = inflater.inflate(R.layout.item_lista_exercicios_plano, null);
 
         ViewHolderLista viewHolder = (ViewHolderLista) view.getTag();
         if(viewHolder == null)
@@ -56,25 +52,24 @@ public class ListaPlanosAdaptador extends BaseAdapter {
             view.setTag(viewHolder);
         }
 
-        viewHolder.update(planos.get(i));
+        viewHolder.update(exercicios.get(i));
         return view;
     }
 
-    private  class ViewHolderLista{
+    private class ViewHolderLista{
 
-        private TextView tvNome, tvTreinador;
+        private TextView tvNome, tvEquipamento, tvTipo;
 
         public ViewHolderLista(View view){
             tvNome = view.findViewById(R.id.tvNome);
-            tvTreinador = view.findViewById(R.id.tvTreinador);
-
+            tvEquipamento = view.findViewById(R.id.tvEquipamento);
+            tvTipo = view.findViewById(R.id.tvTipo);
         }
 
-        public void update(Plano plano){
-            tvNome.setText(plano.getNome());
-            tvTreinador.setText(plano.getTreinador());
-
-
+        public void update(Exercicio exercicio){
+            tvNome.setText(exercicio.getNome());
+            tvEquipamento.setText(exercicio.getEquipamento());
+            tvTipo.setText(exercicio.getTipo_exercicio());
         }
     }
 }
