@@ -46,7 +46,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             setContentView(R.layout.activity_menu_main);
 
 
-
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             drawer = findViewById(R.id.drawerLayout);
@@ -66,7 +65,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
         private boolean carregarFragmentoInicial() {
             Menu menu = navigationView.getMenu();
-            MenuItem item = menu.getItem(0);
+            MenuItem item = menu.getItem(1);
             item.setChecked(true);
             return onNavigationItemSelected(item);
         }
@@ -88,12 +87,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             else
                 username=infoUser.getString(USERNAME, getString(R.string.default_email));
 
-            /*try {
-                JSONObject nome = new JSONObject(username);
-                username = nome.getString("nomeproprio");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
             if (username != null){
                 View headerView = navigationView.getHeaderView(0);
                 TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
@@ -107,7 +100,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             Fragment fragment = null;
             switch (item .getItemId()) {
                 case R.id.planos:
-                    //fragment = new EstaticoFragment();
+
                     fragment = new ListaPlanosFragment();
                     setTitle(item.getTitle());
                     break;

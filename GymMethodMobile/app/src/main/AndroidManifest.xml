@@ -7,6 +7,7 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -14,11 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymMethodMobile"
-        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <activity
-            android:name=".ListaExerciciosPlanoActivity"
+
+            android:name=".vistas.ListaExerciciosPlanoActivity"
+            android:exported="false"
+            android:parentActivityName=".vistas.MenuMainActivity">
 
         <meta-data
             android:name="com.google.android.actions"
@@ -39,24 +42,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".PerfilFragment"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+      
 
         <activity
-            android:name=".vistas.ListaPlanosFragment"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".vistas.MenuMainActivity"
-            android:exported="false"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

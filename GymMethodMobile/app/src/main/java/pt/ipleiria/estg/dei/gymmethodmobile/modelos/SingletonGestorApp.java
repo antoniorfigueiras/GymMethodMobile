@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ExerciciosPlanoListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
@@ -38,8 +39,10 @@ public class SingletonGestorApp {
     private static RequestQueue volleyQueue = null;
     private LoginListener loginListener;
     private PlanosListener planosListener;
+    private ExerciciosPlanoListener exerciciosPlanoListener;
 
     private ArrayList<Plano> planos;
+    private ArrayList<Exercicio> exercicios;
     private BDHelper BD;
 
     private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/login";
@@ -57,6 +60,7 @@ public class SingletonGestorApp {
     }
     private SingletonGestorApp(Context context){
         planos = new ArrayList<>();
+        exercicios = new ArrayList<>();
         BD = new BDHelper(context);
 
     }
@@ -67,6 +71,11 @@ public class SingletonGestorApp {
     public void setPlanosListener(PlanosListener planosListener) {
         this.planosListener = planosListener;
     }
+
+    public void setExerciciosPlanoListener(ExerciciosPlanoListener exerciciosPlanoListener) {
+        this.exerciciosPlanoListener = exerciciosPlanoListener;
+    }
+
     //region Planos
 
     public ArrayList<Plano> getPlanosBD() { // return da copia dos planos
@@ -97,6 +106,37 @@ public class SingletonGestorApp {
     }
 
     //endregion
+
+    //region Exercicios
+
+    public ArrayList<Exercicio> getExerciciosBD() {
+        exercicios = BD.getAllExerciciosBD();
+        return new ArrayList(exercicios);
+    }
+
+    public Exercicio getExercicio(int idExercicioPlano){
+        for (Exercicio e : exercicios){
+            if(e.getId() == idExercicioPlano)
+                return e;
+        }
+        return null;
+    }
+
+    public void adicionarExercicioBD(Exercicio e)
+    {
+        BD.adicionarExercicioBD(e);
+    }
+
+    public void adicionarExerciciosBD(ArrayList<Exercicio> exercicios)
+    {
+        BD.removerAllExercicios();
+        for(Exercicio e : exercicios)
+        {
+            adicionarExercicioBD(e);
+        }
+    }
+    //endregion
+
     public void loginAPI(final String username, final String password, final Context context){
         if (!JsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
@@ -167,21 +207,21 @@ public class SingletonGestorApp {
     public void getExerciciosPlanoAPI(final Context context, String token, int plano_id){
         if (!JsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
-            if (planosListener!=null)
+            if (exerciciosPlanoListener!=null)
             {
-                planosListener.onRefreshListaPlanos(BD.getAllPlanosBD());
+                exerciciosPlanoListener.onRefreshListaExercicios(BD.getAllExerciciosBD());
             }
         }else
         {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetExerciciosPlano + plano_id + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
-                    planos = PlanoJsonParser.parserJsonPlanos(response);
-                    adicionarPlanosBD(planos);
+                    exercicios = PlanoJsonParser.parserJsonExercicios(response);
+                    adicionarExerciciosBD(exercicios);
 
-                    if (planosListener!=null)
+                    if (exerciciosPlanoListener!=null)
                     {
-                        planosListener.onRefreshListaPlanos(planos);
+                        exerciciosPlanoListener.onRefreshListaExercicios(exercicios);
                     }
                 }
             }, new Response.ErrorListener() {
