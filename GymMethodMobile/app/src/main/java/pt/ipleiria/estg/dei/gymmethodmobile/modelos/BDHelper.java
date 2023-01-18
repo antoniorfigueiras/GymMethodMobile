@@ -32,7 +32,7 @@ public class BDHelper extends SQLiteOpenHelper {
                 TREINADOR  + " TEXT NOT NULL " +
                 ")";
         sqLiteDatabase.execSQL(sqlCreateTablePlanos);
-
+        
         String sqlCreateTableExerciciosPlano = "CREATE TABLE " + TABLE_EXERCICIOS_PLANO + "("
                 + ID + " INTEGER  PRIMARY KEY, "
                 + PLANO_ID  + " INTEGER NOT NULL, "

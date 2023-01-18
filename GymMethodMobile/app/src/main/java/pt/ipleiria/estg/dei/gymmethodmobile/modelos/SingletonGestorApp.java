@@ -1,8 +1,6 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.modelos;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -17,21 +15,18 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ExerciciosPlanoListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.PerfilJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PlanoJsonParser;
-import pt.ipleiria.estg.dei.gymmethodmobile.vistas.MenuMainActivity;
 
 public class SingletonGestorApp {
 
@@ -40,14 +35,23 @@ public class SingletonGestorApp {
     private LoginListener loginListener;
     private PlanosListener planosListener;
     private ExerciciosPlanoListener exerciciosPlanoListener;
+    private DetalhesExercicioListener detalhesListener;
+
 
     private ArrayList<Plano> planos;
+    private User perfil;
     private ArrayList<Exercicio> exercicios;
+    private ArrayList<DetalhesExercicio> detalhesExercicios;
     private BDHelper BD;
 
     private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/login";
     private static final  String APIGetPlanos ="http://10.0.2.2/gymmethod/backend/web/api/plano/get-planos";
     private static final  String APIGetExerciciosPlano ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicios-plano/";
+
+    private static final  String APIGetExercicioDetalhes ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicio-detalhes/";
+
+    private static final String APIGetPerfil="http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
+
 
 
     public static synchronized SingletonGestorApp getInstance(Context context){
@@ -74,6 +78,10 @@ public class SingletonGestorApp {
 
     public void setExerciciosPlanoListener(ExerciciosPlanoListener exerciciosPlanoListener) {
         this.exerciciosPlanoListener = exerciciosPlanoListener;
+    }
+
+    public void setDetalhesListener(DetalhesExercicioListener detalhesListener) {
+        this.detalhesListener = detalhesListener;
     }
 
     //region Planos
@@ -173,6 +181,26 @@ public class SingletonGestorApp {
         }
     }
 
+    public void getPerfilAPI(final Context context, String token) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            StringRequest req = new StringRequest(Request.Method.GET, APIGetPerfil + "?access-token=" + token ,  new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    perfil = PerfilJsonParser.parserJsonPerfil(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
     public void getAllPlanosAPI(final Context context, String token){
         if (!JsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
@@ -235,6 +263,36 @@ public class SingletonGestorApp {
         }
     }
 
+    public void getExercicioDetalhesAPI(final Context context, String token, int exercicio_plano_id){
+        if (!JsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (detalhesListener!=null)
+            {
+                detalhesListener.onRefreshDetalhes(BD.getExercicioDetalhesBD(exercicio_plano_id));
+            }
+        }else
+        {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetExercicioDetalhes + exercicio_plano_id + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    detalhesExercicios = PlanoJsonParser.parserJsonDetalhesExercicio(response);
+                    adicionarExerciciosBD(exercicios);
+
+                    if (exerciciosPlanoListener!=null)
+                    {
+                        exerciciosPlanoListener.onRefreshListaExercicios(exercicios);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
 
 
 }

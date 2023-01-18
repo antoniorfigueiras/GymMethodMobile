@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -98,12 +99,16 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
+            Activity activity = null;
             switch (item .getItemId()) {
                 case R.id.planos:
 
                     fragment = new ListaPlanosFragment();
                     setTitle(item.getTitle());
                     break;
+                case R.id.perfil:
+                    activity = new PerfilActivity();
+                    setTitle(item.getTitle());
 
             }
             if (fragment != null)
