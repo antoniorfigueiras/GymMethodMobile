@@ -6,25 +6,24 @@
     <group android:checkableBehavior ="single">
         <item
             android:id="@+id/perfil"
-            android:title="Perfil"
-            android:icon="@drawable/ic_action_list"
-            />
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="@string/menu_perfil" />
         <item
             android:id="@+id/planos"
-            android:title="Planos"
-            android:icon="@drawable/ic_action_grid"
+            android:title="@string/txt_menu_planos"
+            android:icon="@drawable/ic_menu_planos"
             />
         <item android:title="Aulas" >
             <menu>
                 <item
                     android:id="@+id/aulas"
-                    android:title="Aulas"
-                    android:icon="@drawable/ic_action_grid"
+                    android:title="@string/txt_menu_aulas"
+                    android:icon="@drawable/ic_menu_aulas"
                     />
                 <item
                     android:id="@+id/aulasmarcadas"
-                    android:title="Aulas Marcadas"
-                    android:icon="@drawable/ic_action_grid"
+                    android:title="@string/txt_menu_aulas_marcadas"
+                    android:icon="@drawable/ic_menu_aulas_marcadas"
                     />
 
             </menu>

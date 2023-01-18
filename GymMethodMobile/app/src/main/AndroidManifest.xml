@@ -16,14 +16,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GymMethodMobile"
         tools:targetApi="31">
+
         <activity
+
             android:name=".vistas.ListaExerciciosPlanoActivity"
             android:exported="false"
             android:parentActivityName=".vistas.MenuMainActivity">
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/circle" />
+
+        <activity
+            android:name=".AguaActivity"
+
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+      
 
         <activity
             android:name=".vistas.MenuMainActivity"
