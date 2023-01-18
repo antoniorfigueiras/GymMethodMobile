@@ -28,6 +28,7 @@ import java.util.Map;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ExerciciosPlanoListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
+import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PerfilListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PerfilJsonParser;
@@ -41,6 +42,7 @@ public class SingletonGestorApp {
     private LoginListener loginListener;
     private PlanosListener planosListener;
     private ExerciciosPlanoListener exerciciosPlanoListener;
+    private PerfilListener perfilListener;
 
     private ArrayList<Plano> planos;
     private User perfil;
@@ -77,6 +79,10 @@ public class SingletonGestorApp {
 
     public void setExerciciosPlanoListener(ExerciciosPlanoListener exerciciosPlanoListener) {
         this.exerciciosPlanoListener = exerciciosPlanoListener;
+    }
+
+    public void setPerfilListener(PerfilListener perfilListener) {
+        this.perfilListener = perfilListener;
     }
 
     //region Planos
@@ -184,6 +190,8 @@ public class SingletonGestorApp {
                 @Override
                 public void onResponse(String response) {
                     perfil = PerfilJsonParser.parserJsonPerfil(response);
+                    if (perfilListener != null)
+                        perfilListener.onShowPerfil(perfil);
                 }
             }, new Response.ErrorListener() {
                 @Override
