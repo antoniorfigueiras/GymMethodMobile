@@ -5,12 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,165 +25,156 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
+import pt.ipleiria.estg.dei.gymmethodmobile.modelos.DetalhesExercicio;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Exercicio;
+import pt.ipleiria.estg.dei.gymmethodmobile.modelos.ParameterizacaoCliente;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.SingletonGestorApp;
 
 public class DetalhesExercicioActivity extends AppCompatActivity implements DetalhesExercicioListener {
-
-    private Exercicio exercicio;
+    private int id;
+    private DetalhesExercicio detalhes;
+    private ParameterizacaoCliente parameterizacaoCliente;
     private String token;
-    private EditText etTitulo, etSerie, etData, etAutor;
-    private ImageView imgCapa;
+    private TextView tvNome, tvDescricao, tvEquipamento, tvSeries, tvRepeticoes, tvPeso, tvTempo;
+    private EditText etSeriesCliente, etRepeticoesCliente, etPesoCliente, etTempoCLiente;
+    private ImageView imgExemlo;
     private FloatingActionButton fabGuardar;
-    public static final int MIN_CHAR = 3, MIN_NUMERO=4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_exercicio);
-
+        SingletonGestorApp.getInstance(getApplicationContext()).setDetalhesListener(this);
         SharedPreferences sharedPreferences = getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
 
-        int id=getIntent().getIntExtra("ID_LIVRO", 0);
-        livro= SingletonGestorApp.getInstance(this).getExercicio(id);
+         id = getIntent().getIntExtra("ID_EXERCICIO_PLANO", 0);
 
-        etTitulo=findViewById(R.id.etTitulo);
-        etSerie=findViewById(R.id.etSerie);
-        etData=findViewById(R.id.etData);
-        etAutor=findViewById(R.id.etAutor);
-        imgCapa=findViewById(R.id.imgCapa);
+
+
+
+       // Text View
+        tvDescricao = findViewById(R.id.tvDescricao);
+        tvEquipamento = findViewById(R.id.tvEquipamento);
+        tvSeries = findViewById(R.id.tvSeries);
+        tvRepeticoes = findViewById(R.id.tvRepeticoes);
+        tvPeso = findViewById(R.id.tvPeso);
+        tvTempo = findViewById(R.id.tvTempo);
+        imgExemlo = findViewById(R.id.imgExemplo);
+
+        // Edit Text
+        etPesoCliente = findViewById(R.id.etPesoCliente);
+        etRepeticoesCliente = findViewById(R.id.etRepeticoesCliente);
+        etSeriesCliente = findViewById(R.id.etSeriesCliente);
+        etTempoCLiente = findViewById(R.id.etTempoCLiente);
+
+        // Float Action  Button
         fabGuardar=findViewById(R.id.fabGuardar);
 
-        SingletonGestorApp.getInstance(getApplicationContext()).setDetalhesListener(this);
 
-        if(livro != null){
-            carregarLivro();
-            fabGuardar.setImageResource(R.drawable.ic_action_guardar);
-        }
-        else {
-            setTitle("Adicionar Livro");
-            fabGuardar.setImageResource(R.drawable.ic_action_adicionar);
+        SingletonGestorApp.getInstance(getApplicationContext()).getExercicioDetalhesAPI(getApplicationContext(), token, id);
+        SingletonGestorApp.getInstance(getApplicationContext()).getParameterizacaoClienteAPI(getApplicationContext(), token, id);
 
-        }
 
-        fabGuardar.setOnClickListener(new View.OnClickListener() {
+       fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isLivroValido()) {
-                    if (livro != null && token!=null) {
-                    livro.setTitulo(etTitulo.getText().toString());
-                        livro.setAutor(etAutor.getText().toString());
-                        livro.setSerie(etSerie.getText().toString());
-                        livro.setAno(Integer.parseInt(etData.getText().toString()));
-                        SingletonGestorLivros.getInstance(getApplicationContext()).editarLivroAPI(livro, getApplicationContext(), token);
-                    } else {
-                        Livro livroAux = new Livro(0, Integer.parseInt(etData.getText().toString()),
-                                "http://amsi.dei.estg.ipleiria.pt/img/ipl_semfundo.png",
-                                etTitulo.getText().toString(), etSerie.getText().toString(),
-                                etAutor.getText().toString());
-                        SingletonGestorLivros.getInstance(getApplicationContext()).adicionarLivroAPI(livroAux, getApplicationContext(), token);
-                    }
+                //if (isParameterizacaoValido()) {
+
+                    parameterizacaoCliente.setPesoCliente(Integer.parseInt(etPesoCliente.getText().toString()));
+                    parameterizacaoCliente.setRepeticoesCliente(Integer.parseInt(etRepeticoesCliente.getText().toString()));
+                    parameterizacaoCliente.setSeriesCliente(Integer.parseInt(etSeriesCliente.getText().toString()));
+                    parameterizacaoCliente.setTempoCliente(etTempoCLiente.getText().toString());
+                    SingletonGestorApp.getInstance(getApplicationContext()).atualizarParameterizacaoCliente(getApplicationContext(), token, parameterizacaoCliente);
+
                 }
-            }
+            //}
 
         });
 
     }
 
-    private boolean isLivroValido() {
-        String titulo = etTitulo.getText().toString();
-        String autor = etAutor.getText().toString();
-        String serie = etSerie.getText().toString();
-        String ano = etData.getText().toString();
+    /*private boolean isParameterizacaoValido() {
+        String peso = etPesoCliente.getText().toString();
+        String repeticoes = etRepeticoesCliente.getText().toString();
+        String series = etSeriesCliente.getText().toString();
+        String tempo = etTempoCLiente.getText().toString();
 
 
-        if (titulo.length()<MIN_CHAR){
-            etTitulo.setError("Serie invalida");
+        if (peso.length()<1){
+            etPesoCliente.setError("Serie invalida");
             return false;
         }
-        if (autor.length()<=MIN_CHAR){
-            etAutor.setError("Autor invalido");
+        if (repeticoes.length()<=MIN_CHAR){
+            etRepeticoesCliente.setError("Autor invalido");
             return false;
         }
-        if (ano.length() != MIN_NUMERO){
-            etData.setError("Ano invalido");
+        if (series.length() != MIN_NUMERO){
+            etSeriesCliente.setError("Ano invalido");
             return false;
-        }else {
-            int anoNumero = Integer.parseInt(ano);
-            if(anoNumero < 1900 || anoNumero > Calendar.getInstance().get(Calendar.YEAR)){
-                etData.setError("Ano Invalido");
-                return false;
-            }
         }
         return true;
-    }
+    }*/
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.itemRemvover:
-                dialogRemover();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
-    private void dialogRemover() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Remover Livro")
-                .setMessage("Tem a certeza que pretende remover o livro?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        SingletonGestorLivros.getInstance(getApplicationContext()).removerLivroAPI(livro, getApplicationContext());
 
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //Nao fazer nada
-                    }
-                })
-                .setIcon(android.R.drawable.ic_delete)
-                .show();
-    }
-
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(livro!=null){
             getMenuInflater().inflate(R.menu.menu_detalhes_livro,menu);
             return super.onCreateOptionsMenu(menu);
         }
             return false;
-    }
+    }*/
 
-    private void carregarLivro() {
-        Resources res=getResources();
-        String titulo = String.format(res.getString(R.string.act_titulo), livro.getTitulo());
-        setTitle(titulo);
-        etTitulo.setText(livro.getTitulo());
-        etSerie.setText(livro.getSerie());
-        etAutor.setText(livro.getAutor());
-        etData.setText(livro.getAno()+"");
-        //imgCapa.setImageResource(livro.getCapa());
-     Glide.with(this)
-                .load(livro.getCapa())
-                .placeholder(R.drawable.logoipl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgCapa);
-    }
+    /*private void carregarDetalhes() {
+
+        setTitle(detalhes.getNome());
+        tvNome.setText(detalhes.getNome());
+
+        /*Bitmap bm = StringToBitMap(detalhes.getExemplo());
+        imgExemlo.setImageBitmap(bm);
+    }*/
 
     @Override
-    public void onRefreshDetalhes(int operacao) {
-        Intent intent = new Intent();
-        intent.putExtra(MenuMainActivity.OPERACAO, operacao);
-        setResult(RESULT_OK, intent);
-        finish();
+    public void onSetDetalhes(DetalhesExercicio detalhesExercicio, ParameterizacaoCliente parameterizacao) {
+        if (detalhesExercicio != null){
+            setTitle(detalhesExercicio.getNome());
+            tvDescricao.setText(detalhesExercicio.getDescricao());
+            tvEquipamento.setText(detalhesExercicio.getEquipamento());
+            tvSeries.setText(detalhesExercicio.getSeries()+"");
+            tvRepeticoes.setText(detalhesExercicio.getRepeticoes()+"");
+            tvPeso.setText(detalhesExercicio.getPeso()+"");
+            tvTempo.setText(detalhesExercicio.getTempo());
+
+            Bitmap bm = StringToBitMap(detalhesExercicio.getExemplo());
+            imgExemlo.setImageBitmap(bm);
+        }else if (parameterizacao != null)
+        {
+            etPesoCliente.setText(parameterizacao.getPesoCliente()+"");
+            etRepeticoesCliente.setText(parameterizacao.getRepeticoesCliente()+"");
+            etSeriesCliente.setText(parameterizacao.getSeriesCliente()+"");
+            etTempoCLiente.setText(parameterizacao.getTempoCliente());
+            parameterizacaoCliente = parameterizacao;
+        }
+
+        //Toast.makeText(getApplicationContext(),"Erro ao carregar exercicio",Toast.LENGTH_LONG).show();
+    }
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

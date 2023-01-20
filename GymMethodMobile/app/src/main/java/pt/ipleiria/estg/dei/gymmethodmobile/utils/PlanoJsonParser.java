@@ -9,9 +9,11 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Blob;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.DetalhesExercicio;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Exercicio;
+import pt.ipleiria.estg.dei.gymmethodmobile.modelos.ParameterizacaoCliente;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Plano;
 
 
@@ -55,31 +57,110 @@ public class PlanoJsonParser {
         return exercicios;
     }
 
-    public static ArrayList<DetalhesExercicio> parserJsonDetalhesExercicio(JSONArray response) {
-        ArrayList<Exercicio> exercicios = new ArrayList<>();
+    /*public static ArrayList<DetalhesExercicio>  parserJsonDetalhesExercicio(JSONArray response) {
+        ArrayList<DetalhesExercicio> detalhesExercicios = new ArrayList<>();
+        int peso;
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject detalhes = (JSONObject) response.get(i);
+
                 int exercicio_plano_id = detalhes.getInt("exercicio_plano_id");
                 int series = detalhes.getInt("series");
                 int repeticoes = detalhes.getInt("repeticoes");
-                int peso = detalhes.getInt("peso");
+
+                if (detalhes.isNull("peso"))
+                {
+                     peso = 0;
+                }else {
+                     peso = detalhes.getInt("peso");
+                }
+
                 String nome = detalhes.getString("nome");
                 String equipamento = detalhes.getString("equipamento");
                 String descricao = detalhes.getString("descricao");
                 String dificuldade = detalhes.getString("dificuldade");
-                Blob exemplo = (Blob) detalhes.get("exemplo");
-                Time tempo = (Time) detalhes.get("tempo");
+                String exemplo = detalhes.getString("exemplo");
+                String tempo = detalhes.getString("tempo");
 
-                Exercicio auxExercicio = new Exercicio(exercicio_plano_id,  series,  repeticoes,  peso,  nome,  equipamento,  descricao,  dificuldade, exemplo, tempo);
-                exercicios.add(auxExercicio);
+                DetalhesExercicio auxDetalhes = new DetalhesExercicio(exercicio_plano_id,  series,  repeticoes,  peso,  nome,  equipamento,  descricao,  dificuldade, exemplo, tempo);
+                detalhesExercicios.add(auxDetalhes);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return exercicios;
+        return detalhesExercicios;
+    }*/
+    public static DetalhesExercicio parserJsonDetalhesExercicio(JSONArray response) {
+       DetalhesExercicio auxDetalhes = null;
+        int peso;
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject detalhes = (JSONObject) response.get(i);
+
+                int exercicio_plano_id = detalhes.getInt("exercicio_plano_id");
+                int series = detalhes.getInt("series");
+                int repeticoes = detalhes.getInt("repeticoes");
+
+                if (detalhes.isNull("peso"))
+                {
+                    peso = 0;
+                }else {
+                    peso = detalhes.getInt("peso");
+                }
+
+                String nome = detalhes.getString("nome");
+                String equipamento = detalhes.getString("equipamento");
+                String descricao = detalhes.getString("descricao");
+                String dificuldade = detalhes.getString("dificuldade");
+                String exemplo = detalhes.getString("exemplo");
+                String tempo = detalhes.getString("tempo");
+
+                auxDetalhes = new DetalhesExercicio(exercicio_plano_id,  series,  repeticoes,  peso,  nome,  equipamento,  descricao,  dificuldade, exemplo, tempo);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxDetalhes;
     }
+    public static ParameterizacaoCliente parserJsonParameterizacao(JSONArray response) {
+        ParameterizacaoCliente auxParameterizacao = null;
+        int seriesCliente, pesoCliente, repeticoesCliente;
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject parameterizacao = (JSONObject) response.get(i);
 
+                int id = parameterizacao.getInt("id");
+                int exercicio_plano_id = parameterizacao.getInt("exercicio_plano_id");
 
+                if (parameterizacao.isNull("seriesCliente"))
+                {
+                     seriesCliente = 0;
+                }else {
+                     seriesCliente = parameterizacao.getInt("seriesCliente");
+                }
+                if (parameterizacao.isNull("repeticoesCliente"))
+                {
+                     repeticoesCliente = 0;
+                }else {
+                     repeticoesCliente = parameterizacao.getInt("repeticoesCliente");
+                }
+                if (parameterizacao.isNull("pesoCliente"))
+                {
+                     pesoCliente = 0;
+                }else {
+                     pesoCliente = parameterizacao.getInt("pesoCliente");
+                }
+
+                String tempo = parameterizacao.getString("tempoCliente");
+
+                auxParameterizacao = new ParameterizacaoCliente(id, exercicio_plano_id,  seriesCliente,  repeticoesCliente,  pesoCliente, tempo);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxParameterizacao;
+    }
 
 }

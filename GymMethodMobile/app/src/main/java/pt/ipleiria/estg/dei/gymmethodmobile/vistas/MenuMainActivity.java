@@ -66,7 +66,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
         private boolean carregarFragmentoInicial() {
             Menu menu = navigationView.getMenu();
-            MenuItem item = menu.getItem(1);
+            MenuItem item = menu.getItem(0);
             item.setChecked(true);
             return onNavigationItemSelected(item);
         }

@@ -19,7 +19,8 @@
         <activity
 
             android:name=".vistas.DetalhesExercicioActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".vistas.ListaExerciciosPlanoActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -29,6 +30,7 @@
 
             android:name=".vistas.ListaExerciciosPlanoActivity"
             android:exported="false"
+            android:launchMode="singleTask"
             android:parentActivityName=".vistas.MenuMainActivity">
             <meta-data
 

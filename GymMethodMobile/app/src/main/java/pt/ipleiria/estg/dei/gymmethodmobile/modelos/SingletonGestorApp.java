@@ -41,19 +41,19 @@ public class SingletonGestorApp {
     private ArrayList<Plano> planos;
     private User perfil;
     private ArrayList<Exercicio> exercicios;
-    private ArrayList<DetalhesExercicio> detalhesExercicios;
+    private ArrayList<DetalhesExercicio> detalhesExercicioList;
+    private DetalhesExercicio detalhesExercicios;
+    private ArrayList<ParameterizacaoCliente> parameterizacaoList;
+    private ParameterizacaoCliente parameterizacao;
     private BDHelper BD;
 
     private static final  String APILogin ="http://10.0.2.2/gymmethod/backend/web/api/auth/login";
     private static final  String APIGetPlanos ="http://10.0.2.2/gymmethod/backend/web/api/plano/get-planos";
     private static final  String APIGetExerciciosPlano ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicios-plano/";
-    private static final String APIGetPerfil="http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
-
+    private static final  String APIGetPerfil="http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
     private static final  String APIGetExercicioDetalhes ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicio-detalhes/";
-
-    private static final String APIGetPerfil="http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
-
-
+    private static final  String APIGetParameterizacaoCliente ="http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/parameterizacao-cliente/";
+    private static final  String APIAtualizarParameterizacao = "http://10.0.2.2/gymmethod/backend/web/api/parameterizacao/atualizar-parameterizacao-cliente/";
 
     public static synchronized SingletonGestorApp getInstance(Context context){
         if(instance == null)
@@ -66,6 +66,8 @@ public class SingletonGestorApp {
     private SingletonGestorApp(Context context){
         planos = new ArrayList<>();
         exercicios = new ArrayList<>();
+        detalhesExercicioList = new ArrayList<>();
+        parameterizacaoList = new ArrayList<>();
         BD = new BDHelper(context);
 
     }
@@ -138,11 +140,94 @@ public class SingletonGestorApp {
 
     public void adicionarExerciciosBD(ArrayList<Exercicio> exercicios)
     {
-        //BD.removerAllExercicios();
+        BD.removerAllExercicios();
         for(Exercicio e : exercicios)
         {
             adicionarExercicioBD(e);
         }
+    }
+    //endregion
+
+    //region Detalhes Exercicio
+
+    public ArrayList<DetalhesExercicio> getAllDetalhesBD() {
+        detalhesExercicioList = BD.getAllDetalhesExercicioBD();
+        return new ArrayList(detalhesExercicioList);
+    }
+
+    public DetalhesExercicio getDetalhes(int exercicio_plano_id){
+        detalhesExercicioList = BD.getAllDetalhesExercicioBD();
+        for (DetalhesExercicio d : detalhesExercicioList){
+            if(d.getExercicio_plano_id() == exercicio_plano_id)
+                return d;
+        }
+        return null;
+    }
+
+    public void adicionarDetalheBD(DetalhesExercicio d)
+    {
+        BD.adicionarDetalhesExercicioBD(d);
+    }
+
+    public void adicionarDetalhesBD(DetalhesExercicio detalhesExercicios)
+    {
+        //BD.removerAllDetalhesBD();
+        /*for(DetalhesExercicio d : detalhesExercicios)
+        {
+            adicionarDetalhesBD(d);
+        }*/
+
+        if (getDetalhes(detalhesExercicios.getExercicio_plano_id()) == null)
+        {
+            adicionarDetalheBD(detalhesExercicios);
+        }else {
+            BD.editarDetalhesExercicioBD(detalhesExercicios);
+        }
+
+
+    }
+    //endregion
+
+    //region Parameterizacao
+
+    public ArrayList<ParameterizacaoCliente> getAllParameterizacaoBD() {
+        parameterizacaoList = BD.getAllParameterizacaoBD();
+        return new ArrayList(parameterizacaoList);
+    }
+
+    public ParameterizacaoCliente getParameterizacao(int exercicio_plano_id){
+        parameterizacaoList = BD.getAllParameterizacaoBD();
+        for (ParameterizacaoCliente p : parameterizacaoList){
+            if(p.getExercicio_plano_id() == exercicio_plano_id)
+                return p;
+        }
+        return null;
+    }
+
+    public void adicionarParameterizacaoBD(ParameterizacaoCliente p)
+    {
+        BD.adicionarParameterizacaoBD(p);
+    }
+
+    public void adicionarParameterizacoesBD(ParameterizacaoCliente parameterizacao)
+    {
+
+        if (getParameterizacao(parameterizacao.getExercicio_plano_id()) == null)
+        {
+            adicionarParameterizacaoBD(parameterizacao);
+        }else {
+            BD.editarParameterizacaoBD(parameterizacao);
+        }
+
+    }
+    public void editarParameterizacaoDB(ParameterizacaoCliente p)
+    {
+        ParameterizacaoCliente auxP = getParameterizacao(p.getId());
+        if(auxP!=null)
+        {
+            BD.editarParameterizacaoBD(p);
+        }
+
     }
     //endregion
 
@@ -269,7 +354,8 @@ public class SingletonGestorApp {
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
             if (detalhesListener!=null)
             {
-                detalhesListener.onRefreshDetalhes(BD.getExercicioDetalhesBD(exercicio_plano_id));
+                detalhesListener.onSetDetalhes(BD.getDetalhesExercicioBD(exercicio_plano_id), BD.getParameterizacaoBD(exercicio_plano_id));
+
             }
         }else
         {
@@ -277,11 +363,11 @@ public class SingletonGestorApp {
                 @Override
                 public void onResponse(JSONArray response) {
                     detalhesExercicios = PlanoJsonParser.parserJsonDetalhesExercicio(response);
-                    adicionarExerciciosBD(exercicios);
+                    adicionarDetalhesBD(detalhesExercicios);
 
-                    if (exerciciosPlanoListener!=null)
+                    if (detalhesListener!=null)
                     {
-                        exerciciosPlanoListener.onRefreshListaExercicios(exercicios);
+                        detalhesListener.onSetDetalhes(detalhesExercicios, parameterizacao);
                     }
                 }
             }, new Response.ErrorListener() {
@@ -295,5 +381,72 @@ public class SingletonGestorApp {
         }
     }
 
+    public void getParameterizacaoClienteAPI(final Context context, String token, int exercicio_plano_id){
+        if (!JsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (detalhesListener!=null)
+            {
+
+                detalhesListener.onSetDetalhes(detalhesExercicios = null, BD.getParameterizacaoBD(exercicio_plano_id));
+            }
+        }else
+        {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetParameterizacaoCliente + exercicio_plano_id + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    parameterizacao = PlanoJsonParser.parserJsonParameterizacao(response);
+                    adicionarParameterizacoesBD(parameterizacao);
+                    detalhesExercicios = null;
+                    if (detalhesListener!=null)
+                    {
+                        detalhesListener.onSetDetalhes(detalhesExercicios, parameterizacao);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
+    public void atualizarParameterizacaoCliente(final Context context, String token, final ParameterizacaoCliente parameterizacao){
+        if (!JsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.PUT, APIAtualizarParameterizacao + parameterizacao.getId() + "?access-token=" + token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    editarParameterizacaoDB(parameterizacao);
+                    detalhesExercicios = null;
+                    if (detalhesListener!=null)
+                    {
+                        detalhesListener.onSetDetalhes(detalhesExercicios, parameterizacao);
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("seriesCliente", parameterizacao.getSeriesCliente()+"");
+                    params.put("repeticoesCliente", parameterizacao.getRepeticoesCliente()+"");
+                    params.put("pesoCliente", parameterizacao.getPesoCliente()+"");
+                    params.put("tempoCliente", parameterizacao.getTempoCliente());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
 
 }

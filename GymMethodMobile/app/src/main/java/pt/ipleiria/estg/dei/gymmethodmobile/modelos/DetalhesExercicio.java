@@ -7,11 +7,10 @@ import java.sql.Time;
 public class DetalhesExercicio {
 
     private int exercicio_plano_id, series, repeticoes, peso;
-    private String nome, equipamento, descricao, dificuldade;
-    private Blob exemplo;
-    private Time tempo;
+    private String nome, equipamento, descricao, dificuldade, exemplo, tempo;
 
-    public DetalhesExercicio(int exercicio_plano_id, int series, int repeticoes, int peso, String nome, String equipamento, String descricao, String dificuldade, Blob exemplo, Time tempo) {
+
+    public DetalhesExercicio(int exercicio_plano_id, int series, int repeticoes, int peso, String nome, String equipamento, String descricao, String dificuldade, String exemplo, String tempo) {
         this.exercicio_plano_id = exercicio_plano_id;
         this.series = series;
         this.repeticoes = repeticoes;
@@ -88,19 +87,19 @@ public class DetalhesExercicio {
         this.dificuldade = dificuldade;
     }
 
-    public Blob getExemplo() {
+    public String getExemplo() {
         return exemplo;
     }
 
-    public void setExemplo(Blob exemplo) {
+    public void setExemplo(String exemplo) {
         this.exemplo = exemplo;
     }
 
-    public Time getTempo() {
+    public String getTempo() {
         return tempo;
     }
 
-    public void setTempo(Time tempo) {
+    public void setTempo(String tempo) {
         this.tempo = tempo;
     }
 }

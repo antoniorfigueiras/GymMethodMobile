@@ -52,7 +52,7 @@ public class ListaExerciciosPlanoActivity extends AppCompatActivity implements E
         lvExercicios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ListaExerciciosPlanoActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DetalhesExercicioActivity.class);
                 intent.putExtra("ID_EXERCICIO_PLANO", (int) id);
                 startActivityForResult(intent, 1);
             }
