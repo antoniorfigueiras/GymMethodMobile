@@ -20,7 +20,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-
+    <string name="act_titulo">Detalhes:%1$s</string>
     <string name="menu_perfil">Perfil</string>
     <string name="txt_menu_planos">Planos</string>
     <string name="txt_menu_aulas">Aulas</string>
