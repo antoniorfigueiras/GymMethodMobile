@@ -57,6 +57,7 @@ public class PlanoJsonParser {
         return exercicios;
     }
 
+
     /*public static ArrayList<DetalhesExercicio>  parserJsonDetalhesExercicio(JSONArray response) {
         ArrayList<DetalhesExercicio> detalhesExercicios = new ArrayList<>();
         int peso;
@@ -129,7 +130,6 @@ public class PlanoJsonParser {
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject parameterizacao = (JSONObject) response.get(i);
-
                 int id = parameterizacao.getInt("id");
                 int exercicio_plano_id = parameterizacao.getInt("exercicio_plano_id");
 
