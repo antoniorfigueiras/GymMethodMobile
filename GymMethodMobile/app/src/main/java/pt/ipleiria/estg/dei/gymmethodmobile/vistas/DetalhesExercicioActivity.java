@@ -190,6 +190,3 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         editText.setBackgroundColor(Color.TRANSPARENT);
     }
 }
-
-
-
