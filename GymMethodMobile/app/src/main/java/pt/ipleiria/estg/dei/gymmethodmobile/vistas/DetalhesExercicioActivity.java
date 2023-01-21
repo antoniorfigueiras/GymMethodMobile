@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
@@ -77,6 +78,10 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         // Float Action  Button
         fabGuardar=findViewById(R.id.fabGuardar);
 
+        disableEditText(etPesoCliente);
+        disableEditText(etRepeticoesCliente);
+        disableEditText(etSeriesCliente);
+        disableEditText(etTempoCLiente);
 
         SingletonGestorApp.getInstance(getApplicationContext()).getExercicioDetalhesAPI(getApplicationContext(), token, id);
         SingletonGestorApp.getInstance(getApplicationContext()).getParameterizacaoClienteAPI(getApplicationContext(), token, id);
@@ -124,14 +129,11 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
 
 
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(livro!=null){
             getMenuInflater().inflate(R.menu.menu_detalhes_livro,menu);
             return super.onCreateOptionsMenu(menu);
-        }
-            return false;
-    }*/
+    }
 
     /*private void carregarDetalhes() {
 
@@ -176,5 +178,15 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
             e.getMessage();
             return null;
         }
+    }
+
+
+    private void disableEditText(EditText editText) {
+        editText.setFocusable(false);
+        editText.setEnabled(false);
+        editText.setCursorVisible(false);
+        editText.setKeyListener(null);
+        editText.setTextColor(Color.BLACK);
+        editText.setBackgroundColor(Color.TRANSPARENT);
     }
 }
