@@ -18,23 +18,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvTitulo"
+            <!--<TextView
+                android:id="@+id/tvNomeExercicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
-                android:textSize="18dp" />
+                android:text="NomeExercicio"
+                android:textSize="26dp" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imgCapa"
-                    android:layout_width="match_parent"
+                    android:id="@+id/imgExemplo"
+                    android:layout_width="wrap_content"
                     android:layout_height="275dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.1"
@@ -52,18 +52,19 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/tvDescricao"
+                android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Descrição:"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/tvDescricaoTexto"
+                android:id="@+id/tvDescricao"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:gravity="center"
                 android:text="null" />
+
         </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -71,23 +72,23 @@
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/tvDificuldade"
+
+                    android:id="@+id/tv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dificuldade:"
+                    android:text="Equipamento:"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/tvDificuldadeTexto"
+                    android:id="@+id/tvEquipamento"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:text="null" />
+
+
             </LinearLayout>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_weight="1" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,14 +96,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvSeries"
+                    android:id="@+id/tv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Séries:"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNSeries"
+                    android:id="@+id/tvSeries"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -115,14 +116,14 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tvSeriesCliente"
+                    android:id="@+id/tv7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Séries pessoais:"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/tvNSeriesCliente"
+                    android:id="@+id/etSeriesCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -138,14 +139,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvRepeticoes"
+                    android:id="@+id/tv4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Repetições:"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNRepeticoes"
+                    android:id="@+id/tvRepeticoes"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -158,14 +159,14 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tvRepeticoesCliente"
+                    android:id="@+id/tv8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Repetições pessoais:"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/tvNRepeticoesCliente"
+                    android:id="@+id/etRepeticoesCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -180,14 +181,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvPeso"
+                    android:id="@+id/tv5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Peso:"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNPeso"
+                    android:id="@+id/tvPeso"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -200,17 +201,18 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tvPesoCliente"
+                    android:id="@+id/tv9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Peso pessoal:"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/tvNPesoCliente"
+                    android:id="@+id/etPesoCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:inputType="number"
                     android:gravity="center" />
 
             </LinearLayout>
@@ -223,7 +225,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/tvTempo"
+                    android:id="@+id/tv6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tempo:"
@@ -231,7 +233,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvNTempo"
+                    android:id="@+id/tvTempo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -244,14 +246,14 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tvTempoCLiente"
+                    android:id="@+id/tv10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tempo pessoal:"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/tvNTempoCLiente"
+                    android:id="@+id/etTempoCLiente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp" />
