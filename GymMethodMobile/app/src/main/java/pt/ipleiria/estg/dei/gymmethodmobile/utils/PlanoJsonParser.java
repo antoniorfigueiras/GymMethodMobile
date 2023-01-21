@@ -55,30 +55,6 @@ public class PlanoJsonParser {
         return exercicios;
     }
 
-    public static ArrayList<DetalhesExercicio> parserJsonDetalhesExercicio(JSONArray response) {
-        ArrayList<Exercicio> exercicios = new ArrayList<>();
-        try {
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject detalhes = (JSONObject) response.get(i);
-                int exercicio_plano_id = detalhes.getInt("exercicio_plano_id");
-                int series = detalhes.getInt("series");
-                int repeticoes = detalhes.getInt("repeticoes");
-                int peso = detalhes.getInt("peso");
-                String nome = detalhes.getString("nome");
-                String equipamento = detalhes.getString("equipamento");
-                String descricao = detalhes.getString("descricao");
-                String dificuldade = detalhes.getString("dificuldade");
-                Blob exemplo = (Blob) detalhes.get("exemplo");
-                Time tempo = (Time) detalhes.get("tempo");
-
-                Exercicio auxExercicio = new Exercicio(exercicio_plano_id,  series,  repeticoes,  peso,  nome,  equipamento,  descricao,  dificuldade, exemplo, tempo);
-                exercicios.add(auxExercicio);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return exercicios;
-    }
 
 
 
