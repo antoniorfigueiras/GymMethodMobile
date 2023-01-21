@@ -264,14 +264,14 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_action_guardar" />
+        app:srcCompat="@drawable/ic_action_guardar" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
