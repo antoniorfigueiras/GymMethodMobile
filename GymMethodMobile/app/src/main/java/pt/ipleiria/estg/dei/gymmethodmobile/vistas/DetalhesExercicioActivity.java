@@ -180,6 +180,7 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         }
     }
 
+
     private void disableEditText(EditText editText) {
         editText.setFocusable(false);
         editText.setEnabled(false);
@@ -189,3 +190,6 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         editText.setBackgroundColor(Color.TRANSPARENT);
     }
 }
+
+
+

@@ -99,7 +99,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
-            Activity activity = null;
             switch (item .getItemId()) {
                 case R.id.planos:
 
@@ -107,7 +106,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                     setTitle(item.getTitle());
                     break;
                 case R.id.perfil:
-                    activity = new PerfilActivity();
+                    fragment = new PerfilFragment();
                     setTitle(item.getTitle());
 
             }
