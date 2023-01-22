@@ -91,6 +91,7 @@ public class BDHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+
     //region Planos
 
     public Plano adicionarPlanoBD(Plano plano)

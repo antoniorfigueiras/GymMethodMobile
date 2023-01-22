@@ -20,11 +20,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ConsultasListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ExerciciosPlanoListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PerfilListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.ConsultaJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PerfilJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PlanoJsonParser;
@@ -35,6 +37,7 @@ public class SingletonGestorApp {
     private static RequestQueue volleyQueue = null;
     private LoginListener loginListener;
     private PlanosListener planosListener;
+    private ConsultasListener consultasListener;
     private ExerciciosPlanoListener exerciciosPlanoListener;
     private PerfilListener perfilListener;
     private DetalhesExercicioListener detalhesListener;
@@ -43,6 +46,7 @@ public class SingletonGestorApp {
     private ArrayList<Plano> planos;
     private ArrayList<Exercicio> exercicios;
     private ArrayList<DetalhesExercicio> detalhesExercicioList;
+    private ArrayList<Consulta> consultas;
     private DetalhesExercicio detalhesExercicios;
     private ArrayList<ParameterizacaoCliente> parameterizacaoList;
     private ParameterizacaoCliente parameterizacao;
@@ -53,6 +57,7 @@ public class SingletonGestorApp {
     private static final String APIGetExerciciosPlano = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicios-plano/";
     private static final String APIGetPerfil = "http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
     private static final String APIEditPerfil = "http://10.0.2.2/gymmethod/backend/web/api/user/atualizar-perfil";
+    private static final String APIGetConsultas = "http://10.0.2.2/gymmethod/backend/web/api/consulta/get-consultas-marcadas";
     private static final String APIGetExercicioDetalhes = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicio-detalhes/";
     private static final String APIGetParameterizacaoCliente = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/parameterizacao-cliente/";
     private static final String APIAtualizarParameterizacao = "http://10.0.2.2/gymmethod/backend/web/api/parameterizacao/atualizar-parameterizacao-cliente/";
@@ -74,12 +79,17 @@ public class SingletonGestorApp {
 
     }
 
+
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
     }
 
     public void setPlanosListener(PlanosListener planosListener) {
         this.planosListener = planosListener;
+    }
+
+    public void setConsultasListener(ConsultasListener consultasListener) {
+        this.consultasListener = consultasListener;
     }
 
     public void setExerciciosPlanoListener(ExerciciosPlanoListener exerciciosPlanoListener) {
@@ -319,6 +329,30 @@ public class SingletonGestorApp {
             volleyQueue.add(req);
         }
 
+    }
+
+    public void getAllConsultasAPI(final Context context, String token) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetConsultas + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    consultas = ConsultaJsonParser.parserJsonConsultas(response);
+
+                    if (consultasListener != null) {
+                        consultasListener.onRefreshListaConsultas(consultas);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
     }
 
     public void getAllPlanosAPI(final Context context, String token) {

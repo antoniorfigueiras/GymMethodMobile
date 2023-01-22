@@ -34,5 +34,10 @@
             android:title="Água"
             android:icon="@drawable/ic_action_grid"
             />
+        <item
+            android:id="@+id/consultas"
+            android:title="Consultas"
+            android:icon="@drawable/ic_baseline_local_hospital_24"
+            />
     </group>
 </menu>

@@ -98,13 +98,20 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         switch (item.getItemId()) {
+            //Inicia os planos
             case R.id.planos:
                 fragment = new ListaPlanosFragment();
                 setTitle(item.getTitle());
                 break;
+            //Inicia o perfil
             case R.id.perfil:
                 fragment = new PerfilFragment();
                 setTitle(item.getTitle());
+                break;
+            case R.id.consultas:
+                fragment = new ListaConsultasFragment();
+                setTitle(item.getTitle());
+                break;
 
         }
         if (fragment != null)
