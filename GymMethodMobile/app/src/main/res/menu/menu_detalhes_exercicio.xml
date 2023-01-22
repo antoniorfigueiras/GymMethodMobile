@@ -10,6 +10,12 @@
         android:icon="@drawable/ic_action_editar"
         />
     <item
+        android:id="@+id/itemCancelar"
+        android:title="Cancelar"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_cancelar"
+        />
+    <item
         android:id="@+id/itemGuardar"
         android:title="Editar"
         app:showAsAction="always"

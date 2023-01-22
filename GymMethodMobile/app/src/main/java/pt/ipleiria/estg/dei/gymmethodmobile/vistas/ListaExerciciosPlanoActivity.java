@@ -35,7 +35,7 @@ public class ListaExerciciosPlanoActivity extends AppCompatActivity implements E
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_exercicios_plano);
-
+        setTitle("Exercicios");
         lvExercicios = findViewById(R.id.lvExercicios);
 
         SharedPreferences sharedPreferences = getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);

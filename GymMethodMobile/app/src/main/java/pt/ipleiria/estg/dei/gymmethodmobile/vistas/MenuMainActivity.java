@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentManager;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,9 +22,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private NavigationView navigationView;
@@ -112,7 +109,9 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 fragment = new ListaConsultasFragment();
                 setTitle(item.getTitle());
                 break;
-
+            case R.id.aulas:
+                startActivity(new Intent(this, WeeklyAulasActivity.class));
+                break;
         }
         if (fragment != null)
             fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
