@@ -36,7 +36,7 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
     private EditText etSeriesCliente, etRepeticoesCliente, etPesoCliente, etTempoCLiente;
     private ImageView imgExemlo;
     private Menu optionsMenu;
-    private MenuItem itemEditar, itemGuardar;
+    private MenuItem itemEditar, itemGuardar, itemCancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +98,9 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         getMenuInflater().inflate(R.menu.menu_detalhes_exercicio, menu);
         itemEditar = menu.findItem(R.id.itemEditar);
         itemGuardar = menu.findItem(R.id.itemGuardar);
+        itemCancelar = menu.findItem(R.id.itemCancelar);
         itemGuardar.setVisible(false);
+        itemCancelar.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -114,6 +116,7 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
                     enableAllEditText();
                     item.setVisible(false);
                     itemGuardar.setVisible(true);
+                    itemCancelar.setVisible(true);
                 }
 
                 return true;
@@ -129,6 +132,14 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
                 Toast.makeText(getApplicationContext(), "Atualizado com sucesso!", Toast.LENGTH_LONG).show();
                 item.setVisible(false);
                 itemEditar.setVisible(true);
+                return true;
+
+            case R.id.itemCancelar:
+                setTitle(detalhes.getNome());
+                itemGuardar.setVisible(false);
+                item.setVisible(false);
+                itemEditar.setVisible(true);
+                disableAllEditText();
                 return true;
         }
         return super.onOptionsItemSelected(item);

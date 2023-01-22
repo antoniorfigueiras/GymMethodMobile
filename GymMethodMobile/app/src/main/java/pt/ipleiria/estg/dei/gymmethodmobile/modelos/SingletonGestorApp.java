@@ -20,12 +20,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAdapter;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ConsultasListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ExerciciosPlanoListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PerfilListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.AulasJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.ConsultaJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PerfilJsonParser;
@@ -41,9 +43,12 @@ public class SingletonGestorApp {
     private ExerciciosPlanoListener exerciciosPlanoListener;
     private PerfilListener perfilListener;
     private DetalhesExercicioListener detalhesListener;
+    private CalendarAdapter.OnItemListener onItemListener;
+
     private User perfils;
 
     private ArrayList<Plano> planos;
+    private ArrayList<Aula> aulas;
     private ArrayList<Exercicio> exercicios;
     private ArrayList<DetalhesExercicio> detalhesExercicioList;
     private ArrayList<Consulta> consultas;
@@ -61,6 +66,8 @@ public class SingletonGestorApp {
     private static final String APIGetExercicioDetalhes = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicio-detalhes/";
     private static final String APIGetParameterizacaoCliente = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/parameterizacao-cliente/";
     private static final String APIAtualizarParameterizacao = "http://10.0.2.2/gymmethod/backend/web/api/parameterizacao/atualizar-parameterizacao-cliente/";
+    private static final String APIGetAulas = "http://10.0.2.2/gymmethod/backend/web/api/aulas/get-aulas";
+
 
     public static synchronized SingletonGestorApp getInstance(Context context) {
         if (instance == null) {
@@ -79,6 +86,9 @@ public class SingletonGestorApp {
 
     }
 
+    public void setOnItemListener(CalendarAdapter.OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
 
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
@@ -504,4 +514,29 @@ public class SingletonGestorApp {
         }
     }
 
+    public void getAulasAPI(final Context context, String token) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetAulas + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    aulas = AulasJsonParser.parserJsonAulas(response);
+                    Aula.aulasList = aulas;
+                    if (onItemListener != null)
+                    {
+                        onItemListener.onSetAulas(aulas);
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
 }
