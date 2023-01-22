@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     android:orientation="vertical"
-    tools:context=".vistas.EditPerfilFragment">
+    tools:context=".vistas.EditPerfilFragment"
+    android:background="@color/black_800">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,7 +56,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="Nome Próprio"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -84,7 +85,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="Apelido"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -113,7 +115,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="Telemóvel"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -143,7 +146,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="NIF"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -174,7 +178,8 @@
                         android:fontFamily="sans-serif-light"
                         android:hint="Peso"
                         android:inputType="numberDecimal"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -204,7 +209,8 @@
                         android:fontFamily="sans-serif-light"
                         android:inputType="number"
                         android:hint="Altura"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -232,8 +238,9 @@
                         android:layout_width="330dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:hint="Morada"
-                        android:textColor="#000000"
+                        android:hint="Cidade"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -263,7 +270,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="Morada"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -293,7 +301,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="País"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
@@ -323,7 +332,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="Código de Postal"
-                        android:textColor="#000000"
+                        android:textColorHint="@color/grey"
+                        android:textColor="#FFFF"
                         android:textSize="16sp" />
 
                     <View
