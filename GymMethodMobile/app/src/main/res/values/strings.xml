@@ -25,5 +25,27 @@
     <string name="txt_menu_planos">Planos</string>
     <string name="txt_menu_aulas">Aulas</string>
     <string name="txt_menu_aulas_marcadas">Aulas Marcadas</string>
+    <string name="txt_exercicio_nome">nome</string>
+    <string name="txt_exercicio">Exercicio:</string>
+    <string name="txt_equipamento">Equipamento:</string>
+    <string name="txt_equipamento_nome">equipamento</string>
+    <string name="txt_tipo">Tipo:</string>
+    <string name="txt_tipo_nome">tipo</string>
+    <string name="txt_descricao">Descrição:</string>
+    <string name="txt_descricao_content">null</string>
+    <string name="txt_equipamento_exercicio">Equipamento:</string>
+    <string name="txt_null">null</string>
+    <string name="txt_series">Séries:</string>
+    <string name="txt_repeticoes">Repetições:</string>
+    <string name="txt_peso">Peso:</string>
+    <string name="txt_tempo">Tempo:</string>
+    <string name="txt_tempo_pessoal">Tempo pessoal:</string>
+    <string name="txt_peso_pessoal">Peso pessoal:</string>
+    <string name="txt_repeticoes_pessoais">Repetições pessoais:</string>
+    <string name="txt_series_pessoais">Séries pessoais:</string>
+    <string name="txt_nome">Nome:</string>
+    <string name="txt_nome_plano">Nome</string>
+    <string name="txt_treinador">Treinador:</string>
+    <string name="txt_treinador_nome">Treinador</string>
 
 </resources>
