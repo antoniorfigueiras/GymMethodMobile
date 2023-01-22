@@ -35,7 +35,6 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
     private TextView tvNome, tvDescricao, tvEquipamento, tvSeries, tvRepeticoes, tvPeso, tvTempo;
     private EditText etSeriesCliente, etRepeticoesCliente, etPesoCliente, etTempoCLiente;
     private ImageView imgExemlo;
-    private FloatingActionButton fabGuardar;
     private Menu optionsMenu;
     private MenuItem itemEditar, itemGuardar;
 
@@ -65,34 +64,10 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         etSeriesCliente = findViewById(R.id.etSeriesCliente);
         etTempoCLiente = findViewById(R.id.etTempoCLiente);
 
-        // Float Action  Button
-        //fabGuardar = findViewById(R.id.fabGuardar);
-
-
-        // Menu item
-
-
         SingletonGestorApp.getInstance(getApplicationContext()).getExercicioDetalhesAPI(getApplicationContext(), token, id);
         SingletonGestorApp.getInstance(getApplicationContext()).getParameterizacaoClienteAPI(getApplicationContext(), token, id);
 
         disableAllEditText();
-        /*fabGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //if (isParameterizacaoValido()) {
-
-                parameterizacaoCliente.setPesoCliente(Integer.parseInt(etPesoCliente.getText().toString()));
-                parameterizacaoCliente.setRepeticoesCliente(Integer.parseInt(etRepeticoesCliente.getText().toString()));
-                parameterizacaoCliente.setSeriesCliente(Integer.parseInt(etSeriesCliente.getText().toString()));
-                parameterizacaoCliente.setTempoCliente(etTempoCLiente.getText().toString());
-                SingletonGestorApp.getInstance(getApplicationContext()).atualizarParameterizacaoCliente(getApplicationContext(), token, parameterizacaoCliente);
-                disableAllEditText();
-                Toast.makeText(getApplicationContext(), "Atualizado com sucesso!", Toast.LENGTH_LONG).show();
-            }
-            //}
-
-        });*/
-
     }
 
     /*private boolean isParameterizacaoValido() {
@@ -121,7 +96,6 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detalhes_exercicio, menu);
-        //optionsMenu = menu;
         itemEditar = menu.findItem(R.id.itemEditar);
         itemGuardar = menu.findItem(R.id.itemGuardar);
         itemGuardar.setVisible(false);
@@ -159,14 +133,6 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         }
         return super.onOptionsItemSelected(item);
     }
-    /*private void carregarDetalhes() {
-
-        setTitle(detalhes.getNome());
-        tvNome.setText(detalhes.getNome());
-
-        /*Bitmap bm = StringToBitMap(detalhes.getExemplo());
-        imgExemlo.setImageBitmap(bm);
-    }*/
 
     @Override
     public void onSetDetalhes(DetalhesExercicio detalhesExercicio, ParameterizacaoCliente parameterizacao) {
@@ -190,7 +156,6 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
             etTempoCLiente.setText(parameterizacao.getTempoCliente());
             parameterizacaoCliente = parameterizacao;
         }
-
         //Toast.makeText(getApplicationContext(),"Erro ao carregar exercicio",Toast.LENGTH_LONG).show();
     }
 
