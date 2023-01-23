@@ -80,4 +80,11 @@
     <string name="txt_data">Data:</string>
     <string name="txt_hora">Hora</string>
     <string name="txt_status">Status:</string>
+    <string name="txt_dom">DOM</string>
+    <string name="txt_seg">SEG</string>
+    <string name="txt_ter">TER</string>
+    <string name="txt_qua">QUA</string>
+    <string name="txt_qui">QUI</string>
+    <string name="txt_sex">SEX</string>
+    <string name="txt_sab">SAB</string>
 </resources>

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".vistas.WeeklyAulasActivity">
+    tools:context=".vistas.WeeklyAulasActivity"
+    android:background="@color/black_800">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/back"
-            android:textColor="@color/red_700"
-            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/gradStart"
             android:textStyle="bold"
             android:onClick="previousWeekAction"
             android:textSize="20sp"/>
@@ -34,15 +35,15 @@
             android:text="Feb 2021"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/forward"
-            android:textColor="@color/red_700"
-            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/gradStart"
             android:textStyle="bold"
             android:onClick="nextWeekAction"
             android:textSize="20sp"/>
@@ -58,8 +59,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SUN"
-            android:textColor="@color/gray"
+            android:text="@string/txt_dom"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -67,8 +68,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="MON"
-            android:textColor="@color/gray"
+            android:text="@string/txt_seg"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -76,8 +77,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TUE"
-            android:textColor="@color/gray"
+            android:text="@string/txt_ter"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -85,8 +86,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="WED"
-            android:textColor="@color/gray"
+            android:text="@string/txt_qua"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -94,8 +95,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="THUR"
-            android:textColor="@color/gray"
+            android:text="@string/txt_qui"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -103,8 +104,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="FRI"
-            android:textColor="@color/gray"
+            android:text="@string/txt_sex"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -112,10 +113,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SAT"
-            android:textColor="@color/gray"
+            android:text="@string/txt_sab"
             android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
 
     </LinearLayout>
@@ -131,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aulas"
-        android:textColor="@color/red_700"
+        android:textColor="@color/white"
         android:background="@null"
         android:textStyle="bold"
         android:layout_gravity="center"

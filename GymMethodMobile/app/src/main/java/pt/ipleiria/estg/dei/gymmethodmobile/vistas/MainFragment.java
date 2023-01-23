@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.vistas;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -32,7 +31,7 @@ public class MainFragment extends Fragment {
 
         CardView perfil = view.findViewById(R.id.card_perfil);
         CardView plano = view.findViewById(R.id.card_planos);
-        CardView aula = view.findViewById(R.id.card_aulas);
+        CardView aula = view.findViewById(R.id.card_agua);
         CardView consulta = view.findViewById(R.id.card_consultas);
         CardView agua = view.findViewById(R.id.card_agua);
 
@@ -64,8 +63,6 @@ public class MainFragment extends Fragment {
         aula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(v.getContext(),WeeklyAulasActivity.class);
-                startActivity(intent);
             }
         });
 

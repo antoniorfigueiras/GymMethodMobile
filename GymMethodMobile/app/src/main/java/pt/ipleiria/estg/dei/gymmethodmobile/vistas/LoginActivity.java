@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONObject;
+
+import java.util.Locale;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
@@ -29,6 +32,13 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        Locale locale = new Locale("pt_PT");
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        this.getApplicationContext().getResources().updateConfiguration(config, null);
 
         SingletonGestorApp.getInstance(getApplicationContext()).setLoginListener(this);
 
