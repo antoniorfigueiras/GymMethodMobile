@@ -23,6 +23,7 @@ import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PerfilListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.SingletonGestorApp;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.User;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
 
 public class PerfilFragment extends Fragment implements PerfilListener {
 
@@ -53,12 +54,18 @@ public class PerfilFragment extends Fragment implements PerfilListener {
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-        editar.setOnClickListener(new View.OnClickListener(){
+
+        //Inicia o editar perfil
+        editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr= getFragmentManager().beginTransaction();
-                fr.replace(R.id.contentFragment, new EditPerfilFragment());
-                fr.commit();
+                if (!JsonParser.isConnectionInternet(getContext())) {
+                    Toast.makeText(getContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.contentFragment, new EditPerfilFragment());
+                    fr.commit();
+                }
             }
         });
         SingletonGestorApp.getInstance(getContext()).setPerfilListener(this);
@@ -67,6 +74,7 @@ public class PerfilFragment extends Fragment implements PerfilListener {
         return view;
     }
 
+    //Mostra o perfil com os dados do cliente
     @Override
     public void onShowPerfil(User perfil) {
         if (perfil != null) {
@@ -79,8 +87,6 @@ public class PerfilFragment extends Fragment implements PerfilListener {
             tvMorada.setText(perfil.getMorada());
             tvCodPostal.setText(perfil.getCodpostal());
             perfils = perfil;
-
-
         }
     }
 }

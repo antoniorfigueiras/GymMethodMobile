@@ -46,7 +46,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nome Próprio"
+                        android:text="@string/txt_edit_proprio"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -60,13 +60,8 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,7 +70,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Apelido"
+                        android:text="@string/txt_edit_apelido"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -85,17 +80,12 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:hint="Apelido"
-                        android:textColorHint="@color/grey"
                         android:textColor="#FFFF"
+                        android:textColorHint="@color/grey"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -104,7 +94,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Telemóvel"
+                        android:text="@string/txt_edit_telemovel"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -119,11 +109,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
 
                 </LinearLayout>
 
@@ -135,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NIF"
+                        android:text="@string/txt_edit_nif"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -150,11 +135,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
 
                 </LinearLayout>
 
@@ -167,7 +147,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Peso"
+                        android:text="@string/txt_edit_peso"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -182,11 +162,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -198,7 +173,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Altura"
+                        android:text="@string/txt_edit_altura"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -213,11 +188,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -229,7 +199,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cidade"
+                        android:text="@string/txt_edit_cidade"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -243,11 +213,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
 
                 </LinearLayout>
 
@@ -260,7 +225,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Morada"
+                        android:text="@string/txt_morada"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -274,12 +239,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -291,7 +250,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="País"
+                        android:text="@string/txt_edit_pais"
                         android:textColor="@color/headings"
                         android:textSize="13sp" />
 
@@ -305,11 +264,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
 
                 </LinearLayout>
 
@@ -336,11 +290,6 @@
                         android:textColor="#FFFF"
                         android:textSize="16sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
 
 
                 </LinearLayout>

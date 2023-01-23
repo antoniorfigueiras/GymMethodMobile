@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +21,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private NavigationView navigationView;
+    public NavigationView navigationView;
     private DrawerLayout drawer;
     private Integer user_id;
     private String token;
@@ -61,6 +63,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         carregarFragmentoInicial();
     }
 
+
     private boolean carregarFragmentoInicial() {
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.getItem(0);
@@ -88,13 +91,18 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
             tvEmail.setText(username);
         }
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         switch (item.getItemId()) {
+
+            //Inicia o menu principal
+            case R.id.menu:
+                fragment = new MainFragment();
+                setTitle("Menu Principal");
+                break;
             //Inicia os planos
             case R.id.planos:
                 fragment = new ListaPlanosFragment();
@@ -102,15 +110,23 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;
             //Inicia o perfil
             case R.id.perfil:
+                if (!JsonParser.isConnectionInternet(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
                 fragment = new PerfilFragment();
-                setTitle(item.getTitle());
+                setTitle(item.getTitle());}
                 break;
             case R.id.consultas:
+                if (!JsonParser.isConnectionInternet(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
                 fragment = new ListaConsultasFragment();
-                setTitle(item.getTitle());
+                setTitle(item.getTitle());}
                 break;
-            case R.id.aulas:
-                startActivity(new Intent(this, WeeklyAulasActivity.class));
+            case R.id.logout:
+                Intent intent2 = new Intent(this, LoginActivity.class);
+                startActivity(intent2);
+                finish();
                 break;
         }
         if (fragment != null)
