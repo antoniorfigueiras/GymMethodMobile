@@ -1,10 +1,12 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.modelos;
 
+import java.io.Serializable;
+import java.nio.file.SecureDirectoryStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Aula
+public class Aula implements Serializable
 {
     public static ArrayList<Aula> aulasList = new ArrayList<>();
 
