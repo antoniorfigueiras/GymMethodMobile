@@ -111,12 +111,12 @@
 
                 <Button
                     android:id="@+id/btnLogin"
+                    android:width="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:width="20dp"
                     android:onClick="onClickLogin"
-                    android:text="Login"
-                    app:backgroundTint="@color/gradEnd" />
+                    app:backgroundTint="@color/gradEnd"
+                    android:text="Login" />
 
 
             </LinearLayout>
