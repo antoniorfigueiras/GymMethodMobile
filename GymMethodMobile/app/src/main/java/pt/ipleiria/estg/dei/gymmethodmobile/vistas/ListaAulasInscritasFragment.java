@@ -67,7 +67,7 @@ public class ListaAulasInscritasFragment extends Fragment implements AulasInscri
         });
 
         SingletonGestorApp.getInstance(getContext()).setAulasInscritasListener(this);
-        SingletonGestorApp.getInstance(getContext()).getAulasInscritas(getContext(), token);
+       // SingletonGestorApp.getInstance(getContext()).getAulasInscritas(getContext(), token);
         return view;
     }
 
@@ -75,7 +75,7 @@ public class ListaAulasInscritasFragment extends Fragment implements AulasInscri
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
         if (resultCode== Activity.RESULT_OK){
             SingletonGestorApp.getInstance(getContext()).setAulasInscritasListener(this);
-            SingletonGestorApp.getInstance(getContext()).getAulasInscritas(getContext(), token); // quando sai dos detalhes e volta a lsta
+            SingletonGestorApp.getInstance(getContext()).getAulasInscritas(getContext(), token);
             Toast.makeText(getContext(), "Inscricao removida com sucesso", Toast.LENGTH_SHORT).show();
         }
     }
@@ -87,6 +87,8 @@ public class ListaAulasInscritasFragment extends Fragment implements AulasInscri
         if (searchView!=null){
             searchView.onActionViewCollapsed();
         }
+        SingletonGestorApp.getInstance(getContext()).setAulasInscritasListener(this);
+        SingletonGestorApp.getInstance(getContext()).getAulasInscritas(getContext(), token);
         super.onResume();
     }
 
@@ -96,6 +98,7 @@ public class ListaAulasInscritasFragment extends Fragment implements AulasInscri
     public void onRefreshListaAulasInscritas(ArrayList<AulaInscrita> aulasInscritas) {
         if(aulasInscritas != null){
             lvAulasIscritas.setAdapter(new ListaAulasInscritasAdaptador(getContext(), aulasInscritas));
+            SingletonGestorApp.getInstance(getContext()).unsetAulasInscritasListener();
         }
     }
 }
