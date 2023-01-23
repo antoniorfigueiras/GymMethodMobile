@@ -128,6 +128,9 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 startActivity(intent2);
                 finish();
                 break;
+            case R.id.aulas:
+                startActivity(new Intent(this, WeeklyAulasActivity.class));
+                break;
 
         }
         if (fragment != null)
