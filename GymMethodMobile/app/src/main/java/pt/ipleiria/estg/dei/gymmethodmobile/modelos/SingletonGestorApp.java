@@ -21,14 +21,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAdapter;
+import pt.ipleiria.estg.dei.gymmethodmobile.listeners.AulasInscritasListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ConsultasListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ExerciciosPlanoListener;
+import pt.ipleiria.estg.dei.gymmethodmobile.listeners.InscricoesListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PerfilListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.AulasJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.ConsultaJsonParser;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.InscricoesJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PerfilJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.PlanoJsonParser;
@@ -44,11 +47,13 @@ public class SingletonGestorApp {
     private PerfilListener perfilListener;
     private DetalhesExercicioListener detalhesListener;
     private CalendarAdapter.OnItemListener onItemListener;
-
+    private InscricoesListener inscricoesListener;
+    private AulasInscritasListener aulasInscritasListener;
     private User perfils;
 
     private ArrayList<Plano> planos;
     private ArrayList<Aula> aulas;
+    private ArrayList<AulaInscrita> aulasInscritas;
     private ArrayList<Exercicio> exercicios;
     private ArrayList<DetalhesExercicio> detalhesExercicioList;
     private ArrayList<Consulta> consultas;
@@ -67,7 +72,10 @@ public class SingletonGestorApp {
     private static final String APIGetParameterizacaoCliente = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/parameterizacao-cliente/";
     private static final String APIAtualizarParameterizacao = "http://10.0.2.2/gymmethod/backend/web/api/parameterizacao/atualizar-parameterizacao-cliente/";
     private static final String APIGetAulas = "http://10.0.2.2/gymmethod/backend/web/api/aulas/get-aulas";
-
+    private static final String APIInscreverAula = "http://10.0.2.2/gymmethod/backend/web/api/inscricoes/inscrever/";
+    private static final String APIRemoverInscricaoAula = "http://10.0.2.2/gymmethod/backend/web/api/inscricoes/remover-inscricao/";
+    private static final String APIGetAulasInscritas = "http://10.0.2.2/gymmethod/backend/web/api/aulas/get-aulas-inscritas";
+    private static final String APIGetInscricoes = "http://10.0.2.2/gymmethod/backend/web/api/inscricoes/get-inscricoes";
 
     public static synchronized SingletonGestorApp getInstance(Context context) {
         if (instance == null) {
@@ -84,6 +92,17 @@ public class SingletonGestorApp {
         parameterizacaoList = new ArrayList<>();
         BD = new BDHelper(context);
 
+    }
+
+    public void setAulasInscritasListener(AulasInscritasListener aulasInscritasListener) {
+        this.aulasInscritasListener = aulasInscritasListener;
+    }
+    public void unsetAulasInscritasListener() {
+        this.aulasInscritasListener = null;
+    }
+
+    public void setInscricoesListener(InscricoesListener inscricoesListener) {
+        this.inscricoesListener = inscricoesListener;
     }
 
     public void setOnItemListener(CalendarAdapter.OnItemListener onItemListener) {
@@ -192,12 +211,6 @@ public class SingletonGestorApp {
     }
 
     public void adicionarDetalhesBD(DetalhesExercicio detalhesExercicios) {
-        //BD.removerAllDetalhesBD();
-        /*for(DetalhesExercicio d : detalhesExercicios)
-        {
-            adicionarDetalhesBD(d);
-        }*/
-
         if (getDetalhes(detalhesExercicios.getExercicio_plano_id()) == null) {
             adicionarDetalheBD(detalhesExercicios);
         } else {
@@ -539,4 +552,84 @@ public class SingletonGestorApp {
             volleyQueue.add(req);
         }
     }
+
+    public void inscreverAulaAPI(final Context context, String token, int idAula) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            StringRequest req = new StringRequest(Request.Method.POST, APIInscreverAula + "?access-token=" + token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    int inscricao_id = InscricoesJsonParser.parserJsonInscrever(response);
+
+                    if (inscricoesListener != null)
+                    {
+                        inscricoesListener.onInscrever(inscricao_id);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }) {
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("idAula", idAula +"");
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+    public void removerInscricaoAulaAPI(final Context context, String token, int idInscricao, int action){
+        if (!JsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.DELETE, APIRemoverInscricaoAula + idInscricao + "?access-token=" + token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Boolean success = InscricoesJsonParser.parserJsonRemoverInscricao(response);
+                    if (inscricoesListener != null)
+                    {
+                        inscricoesListener.onRemoverInscricao(action, success); // 0, volta para lista de aulas marcadas, 1 fica na vista detalhes
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+    public void getAulasInscritas(final Context context, String token) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetAulasInscritas + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    aulasInscritas = AulasJsonParser.parserJsonAulasInscritas(response);
+                    AulaInscrita.aulasInscritasList = aulasInscritas;
+                    if (aulasInscritasListener != null)
+                    {
+                        aulasInscritasListener.onRefreshListaAulasInscritas(aulasInscritas);
+                    }else if (inscricoesListener != null){
+                        inscricoesListener.onGetInscricoes(aulasInscritas);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
 }
