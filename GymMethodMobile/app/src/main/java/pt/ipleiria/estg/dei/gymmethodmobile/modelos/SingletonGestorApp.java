@@ -63,6 +63,7 @@ public class SingletonGestorApp {
     private static final String APIGetPerfil = "http://10.0.2.2/gymmethod/backend/web/api/user/get-perfil";
     private static final String APIEditPerfil = "http://10.0.2.2/gymmethod/backend/web/api/user/atualizar-perfil";
     private static final String APIGetConsultas = "http://10.0.2.2/gymmethod/backend/web/api/consulta/get-consultas-marcadas";
+    private static final String APIGetConsultasConcluidas = "http://10.0.2.2/gymmethod/backend/web/api/consulta/get-consultas-concluidas";
     private static final String APIGetExercicioDetalhes = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/get-exercicio-detalhes/";
     private static final String APIGetParameterizacaoCliente = "http://10.0.2.2/gymmethod/backend/web/api/exercicio-plano/parameterizacao-cliente/";
     private static final String APIAtualizarParameterizacao = "http://10.0.2.2/gymmethod/backend/web/api/parameterizacao/atualizar-parameterizacao-cliente/";
@@ -346,6 +347,30 @@ public class SingletonGestorApp {
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetConsultas + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    consultas = ConsultaJsonParser.parserJsonConsultas(response);
+
+                    if (consultasListener != null) {
+                        consultasListener.onRefreshListaConsultas(consultas);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
+    public void getAllConsultasConcluidasAPI(final Context context, String token) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetConsultasConcluidas + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     consultas = ConsultaJsonParser.parserJsonConsultas(response);
