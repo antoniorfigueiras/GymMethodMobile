@@ -51,7 +51,6 @@ public class AguaActivity extends AppCompatActivity
         String descricao = etDescricao.getText().toString();
         Float valor = Float.valueOf(etValor.getText().toString());
         Agua novaAgua = new Agua(0, descricao, valor, CalendarUtils.selectedDate, time);
-        //Event.eventsList.add(newEvent);
         SingletonGestorApp.getInstance(getApplicationContext()).adicionarAguaAPI(getApplicationContext(), token, novaAgua);
         finish();
     }
