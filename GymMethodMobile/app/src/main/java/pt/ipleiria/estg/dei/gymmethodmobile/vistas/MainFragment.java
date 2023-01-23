@@ -90,6 +90,10 @@ public class MainFragment extends Fragment {
         agua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!JsonParser.isConnectionInternet(getContext())) {
+                    Toast.makeText(getContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(getContext(), WeeklyAguaActivity.class));}
             }
         });
 

@@ -29,11 +29,6 @@
                     android:title="@string/txt_menu_agua"
                     android:icon="@drawable/ic_action_agua"
                     />
-                <item
-                    android:id="@+id/calorias"
-                    android:title="@string/txt_menu_calorias"
-                    android:icon="@drawable/ic_action_food"
-                    />
             </menu>
         </item>
         <item android:title="Aulas" >

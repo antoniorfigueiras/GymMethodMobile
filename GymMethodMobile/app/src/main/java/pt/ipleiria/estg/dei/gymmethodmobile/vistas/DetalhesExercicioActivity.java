@@ -120,6 +120,10 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
                 item.setVisible(false);
                 itemEditar.setVisible(true);
                 disableAllEditText();
+                etPesoCliente.setText(parameterizacaoCliente.getPesoCliente() + "");
+                etRepeticoesCliente.setText(parameterizacaoCliente.getRepeticoesCliente() + "");
+                etSeriesCliente.setText(parameterizacaoCliente.getSeriesCliente() + "");
+                etTempoCLiente.setText(parameterizacaoCliente.getTempoCliente());
                 return true;
         }
         return super.onOptionsItemSelected(item);

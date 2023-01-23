@@ -55,7 +55,6 @@ public class ListaPlanosFragment extends Fragment implements PlanosListener {
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
 
 
-
         // Para selecionar um plano da lista
         lvPlanos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

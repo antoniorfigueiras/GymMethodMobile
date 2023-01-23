@@ -60,39 +60,44 @@ public class EditPerfilFragment extends Fragment implements PerfilListener {
             @Override
             public void onClick(View view) {
                 //Caso o perfil seja válido vai atualizar os dados do perfil
-                if (isPerfilValido()) {
-                    perfils.setNomeproprio(etNomeProprio.getText().toString());
-                    perfils.setApelido(etApelido.getText().toString());
-                    perfils.setTelemovel(Integer.parseInt(etTelemovel.getText().toString()));
-                    perfils.setNif(Integer.parseInt(etNIF.getText().toString()));
-                    perfils.setAltura(Integer.parseInt(etAltura.getText().toString()));
-                    perfils.setPeso(Double.parseDouble(etPeso.getText().toString()));
-                    perfils.setMorada(etMorada.getText().toString());
-                    perfils.setCodpostal(etCodPostal.getText().toString());
-                    perfils.setCidade(etCidade.getText().toString());
-                    perfils.setPais(etPais.getText().toString());
+                try {
+                    if (isPerfilValido()) {
+                        perfils.setNomeproprio(etNomeProprio.getText().toString());
+                        perfils.setApelido(etApelido.getText().toString());
+                        perfils.setTelemovel(Integer.parseInt(etTelemovel.getText().toString()));
+                        perfils.setNif(Integer.parseInt(etNIF.getText().toString()));
+                        perfils.setAltura(Integer.parseInt(etAltura.getText().toString()));
+                        perfils.setPeso(Double.parseDouble(etPeso.getText().toString()));
+                        perfils.setMorada(etMorada.getText().toString());
+                        perfils.setCodpostal(etCodPostal.getText().toString());
+                        perfils.setCidade(etCidade.getText().toString());
+                        perfils.setPais(etPais.getText().toString());
 
 
-                    //atualizar o nome na barra
-                    View headerView = ((MenuMainActivity) getActivity()).navigationView.getHeaderView(0);
-                    TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
-                    tvEmail.setText(etNomeProprio.getText().toString() + " " + etApelido.getText().toString());
+                        //atualizar o nome na barra
+                        View headerView = ((MenuMainActivity) getActivity()).navigationView.getHeaderView(0);
+                        TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
+                        tvEmail.setText(etNomeProprio.getText().toString() + " " + etApelido.getText().toString());
 
-                    SingletonGestorApp.getInstance(getContext()).editPerfilAPI(perfils, getContext(), token);
+                        SingletonGestorApp.getInstance(getContext()).editPerfilAPI(perfils, getContext(), token);
 
-                    //Volta ao perfil
-                    FragmentTransaction fr = getFragmentManager().beginTransaction();
-                    fr.replace(R.id.contentFragment, new PerfilFragment());
-                    fr.commit();
-                    //Fecha o teclado
-                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    Toast.makeText(getContext(), "Perfil editado", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "Corrija os erros", Toast.LENGTH_SHORT).show();
-                    //Fecha o teclado
-                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        //Volta ao perfil
+                        FragmentTransaction fr = getFragmentManager().beginTransaction();
+                        fr.replace(R.id.contentFragment, new PerfilFragment());
+                        fr.commit();
+                        //Fecha o teclado
+                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        Toast.makeText(getContext(), "Perfil editado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Corrija os erros", Toast.LENGTH_SHORT).show();
+                        //Fecha o teclado
+                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                } catch (Exception e)
+                {
+                    Toast.makeText(getContext(),"Máximo 9 digitos",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -129,6 +134,7 @@ public class EditPerfilFragment extends Fragment implements PerfilListener {
         double peso = Double.parseDouble(etPeso.getText().toString());
         int telemovel = Integer.parseInt(etTelemovel.getText().toString());
         int nif = Integer.parseInt(etNIF.getText().toString());
+
         String morada = etMorada.getText().toString();
         String cidade = etCidade.getText().toString();
         String pais = etPais.getText().toString();
