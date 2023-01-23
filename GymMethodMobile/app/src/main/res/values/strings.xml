@@ -25,5 +25,54 @@
     <string name="txt_menu_planos">Planos</string>
     <string name="txt_menu_aulas">Aulas</string>
     <string name="txt_menu_aulas_marcadas">Aulas Marcadas</string>
+<<<<<<< Updated upstream
+=======
+    <string name="txt_exercicio_nome">nome</string>
+    <string name="txt_exercicio">Exercicio:</string>
+    <string name="txt_equipamento">Equipamento:</string>
+    <string name="txt_equipamento_nome">equipamento</string>
+    <string name="txt_tipo">Tipo:</string>
+    <string name="txt_tipo_nome">tipo</string>
+    <string name="txt_descricao">Descrição:</string>
+    <string name="txt_descricao_content">null</string>
+    <string name="txt_equipamento_exercicio">Equipamento:</string>
+    <string name="txt_null">null</string>
+    <string name="txt_series">Séries:</string>
+    <string name="txt_repeticoes">Repetições:</string>
+    <string name="txt_peso">Peso:</string>
+    <string name="txt_tempo">Tempo:</string>
+    <string name="txt_tempo_pessoal">Tempo pessoal:</string>
+    <string name="txt_peso_pessoal">Peso pessoal:</string>
+    <string name="txt_repeticoes_pessoais">Repetições pessoais:</string>
+    <string name="txt_series_pessoais">Séries pessoais:</string>
+    <string name="txt_nome">Nome:</string>
+    <string name="txt_nome_plano">Nome</string>
+    <string name="txt_treinador">Treinador:</string>
+    <string name="txt_treinador_nome">Treinador</string>
+    <string name="txt_logout">Logout</string>
+    <string name="txt_consultas">Consultas</string>
+    <string name="txt_agua">Água</string>
+    <string name="txt_menu_home">Menu Principal</string>
+    <string name="txt_detalhes_perfil">Consulta o teu perfil</string>
+    <string name="txt_detalhes_planos">Consulta os teus planos de treino</string>
+    <string name="txt_detalhes_aulas">Consulta as aulas disponíveis</string>
+    <string name="txt_detalhes_consultas">As tuas consultas</string>
+    <string name="txt_detalhes_agua">Bebe água</string>
+    <string name="txt_perfil_telemovel">Telémovel</string>
+    <string name="txt_perfil_NIF">NIF</string>
+    <string name="txt_perfil_peso">Peso</string>
+    <string name="txt_perfil_altura">Altura</string>
+    <string name="txt_perfil_morada">Morada</string>
+    <string name="txt_perfil_cod_postal">Código de Postal</string>
+    <string name="txt_edit_proprio">Nome Próprio</string>
+    <string name="txt_edit_apelido">Apelido</string>
+    <string name="txt_edit_telemovel">Telemóvel</string>
+    <string name="txt_edit_nif">NIF</string>
+    <string name="txt_edit_peso">Peso</string>
+    <string name="txt_edit_altura">Altura</string>
+    <string name="txt_edit_cidade">Cidade</string>
+    <string name="txt_morada">Morada</string>
+    <string name="txt_edit_pais">País</string>
+>>>>>>> Stashed changes
 
 </resources>

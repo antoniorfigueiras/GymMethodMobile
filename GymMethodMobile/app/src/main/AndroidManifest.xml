@@ -17,7 +17,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-
             android:name=".vistas.DetalhesExercicioActivity"
             android:exported="false"
             android:parentActivityName=".vistas.ListaExerciciosPlanoActivity">
@@ -26,19 +25,14 @@
                 android:value="" />
         </activity>
         <activity
-
-
             android:name=".vistas.ListaExerciciosPlanoActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:parentActivityName=".vistas.MenuMainActivity">
             <meta-data
-
                 android:name="com.google.android.actions"
                 android:value="" />
         </activity>
-
-
         <activity
             android:name=".vistas.AguaActivity"
             android:exported="false">

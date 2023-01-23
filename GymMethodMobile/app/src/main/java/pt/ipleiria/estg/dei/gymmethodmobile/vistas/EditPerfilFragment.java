@@ -25,6 +25,7 @@ public class EditPerfilFragment extends Fragment implements PerfilListener {
     private User perfils;
     private String token;
     private FloatingActionButton fabGuardar;
+    public static final String SHARED_USER = "DADOS_USER"; // CHAVE
     private EditText etNomeProprio, etApelido, etAltura, etPeso, etTelemovel, etNIF, etMorada, etCidade, etPais, etCodPostal;
     public static final int MAX_CHAR = 55, MIN_CHAR = 2;
 
@@ -37,6 +38,7 @@ public class EditPerfilFragment extends Fragment implements PerfilListener {
         setHasOptionsMenu(true);
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
+
 
         etNomeProprio = view.findViewById(R.id.etNomeProprio);
         etApelido = view.findViewById(R.id.etApelido);
@@ -54,6 +56,7 @@ public class EditPerfilFragment extends Fragment implements PerfilListener {
         fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Caso o perfil seja válido vai atualizar os dados do perfil
                 if (isPerfilValido()) {
                     perfils.setNomeproprio(etNomeProprio.getText().toString());
                     perfils.setApelido(etApelido.getText().toString());
@@ -66,17 +69,25 @@ public class EditPerfilFragment extends Fragment implements PerfilListener {
                     perfils.setCidade(etCidade.getText().toString());
                     perfils.setPais(etPais.getText().toString());
 
+
+                    //atualizar o nome na barra
+                    View headerView = ((MenuMainActivity) getActivity()).navigationView.getHeaderView(0);
+                    TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
+                    tvEmail.setText(etNomeProprio.getText().toString() + " " + etApelido.getText().toString());
+
                     SingletonGestorApp.getInstance(getContext()).editPerfilAPI(perfils, getContext(), token);
 
-
+                    //Volta ao perfil
                     FragmentTransaction fr = getFragmentManager().beginTransaction();
                     fr.replace(R.id.contentFragment, new PerfilFragment());
                     fr.commit();
+                    //Fecha o teclado
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     Toast.makeText(getContext(), "Perfil editado", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Corrija os erros", Toast.LENGTH_SHORT).show();
+                    //Fecha o teclado
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
@@ -89,6 +100,7 @@ public class EditPerfilFragment extends Fragment implements PerfilListener {
         return view;
     }
 
+    //Introduz os dados automaticamente
     @Override
     public void onShowPerfil(User perfil) {
         if (perfil != null) {

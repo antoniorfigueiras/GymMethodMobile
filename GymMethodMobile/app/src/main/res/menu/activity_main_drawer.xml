@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior ="single">
         <item
+            android:id="@+id/menu"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/txt_menu_home" />
+        <item
             android:id="@+id/perfil"
             android:icon="@drawable/ic_baseline_person_24"
             android:title="@string/menu_perfil" />
@@ -29,10 +33,34 @@
             </menu>
         </item>
 
+<<<<<<< Updated upstream
         <item
             android:id="@+id/contadordeagua"
             android:title="Água"
             android:icon="@drawable/ic_action_grid"
             />
+=======
+        <item android:title="" >
+            <menu>
+                <item
+                    android:id="@+id/contadordeagua"
+                    android:title="@string/txt_agua"
+                    android:icon="@drawable/ic_action_grid"
+                    />
+                <item
+                    android:id="@+id/consultas"
+                    android:title="@string/txt_consultas"
+                    android:icon="@drawable/ic_baseline_local_hospital_24"
+                    />
+                <item
+                    android:id="@+id/logout"
+                    android:title="@string/txt_logout"
+                    android:icon="@drawable/ic_action_logout"
+                    />
+
+            </menu>
+        </item>
+
+>>>>>>> Stashed changes
     </group>
 </menu>

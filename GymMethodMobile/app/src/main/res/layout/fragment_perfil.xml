@@ -41,7 +41,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:text="Figueiras"
+            android:text="@string/txt_null"
             android:textColor="@color/white"
             android:textSize="32sp" />
 
@@ -54,7 +54,7 @@
             android:layout_below="@+id/tvNome"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:text="Santarém, Portugal"
+            android:text="@string/txt_null"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="14sp" />
@@ -84,15 +84,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< Updated upstream
         android:layout_below="@+id/linlay1">
+=======
+        android:layout_below="@+id/linlay1"
+        android:background="@color/black_800">
+>>>>>>> Stashed changes
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -103,7 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telémovel"
+                    android:text="@string/txt_perfil_telemovel"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
@@ -112,14 +117,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+<<<<<<< Updated upstream
                     android:text="910733587"
                     android:textColor="#000000"
+=======
+                    android:text="@string/txt_null"
+                    android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@color/grey" />
 
             </LinearLayout>
@@ -132,7 +142,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NIF"
+                    android:text="@string/txt_perfil_NIF"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
@@ -141,14 +151,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+<<<<<<< Updated upstream
                     android:text="123456789"
                     android:textColor="#000000"
+=======
+                    android:text="@string/txt_null"
+                    android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@color/grey" />
 
             </LinearLayout>
@@ -156,13 +171,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Peso"
+                    android:text="@string/txt_perfil_peso"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
@@ -171,27 +185,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+<<<<<<< Updated upstream
                     android:text="70"
                     android:textColor="#000000"
+=======
+                    android:text="@string/txt_null"
+                    android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@color/grey" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Altura"
+                    android:text="@string/txt_perfil_altura"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
@@ -200,14 +219,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+<<<<<<< Updated upstream
                     android:text="180"
                     android:textColor="#000000"
+=======
+                    android:text="@string/txt_null"
+                    android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@color/grey" />
 
             </LinearLayout>
@@ -215,13 +239,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Morada"
+                    android:text="@string/txt_perfil_morada"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
@@ -230,14 +253,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+<<<<<<< Updated upstream
                     android:text="Rua 2 de Abril"
                     android:textColor="#000000"
+=======
+                    android:text="@string/txt_null"
+                    android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@color/grey" />
 
             </LinearLayout>
@@ -245,13 +273,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Código de Postal"
+                    android:text="@string/txt_perfil_cod_postal"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
@@ -260,14 +287,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+<<<<<<< Updated upstream
                     android:text="2080-640"
                     android:textColor="#000000"
+=======
+                    android:text="@string/txt_null"
+                    android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@color/grey" />
 
 
