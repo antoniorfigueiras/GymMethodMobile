@@ -70,27 +70,6 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
         disableAllEditText();
     }
 
-    /*private boolean isParameterizacaoValido() {
-        String peso = etPesoCliente.getText().toString();
-        String repeticoes = etRepeticoesCliente.getText().toString();
-        String series = etSeriesCliente.getText().toString();
-        String tempo = etTempoCLiente.getText().toString();
-
-
-        if (peso.length()<1){
-            etPesoCliente.setError("Serie invalida");
-            return false;
-        }
-        if (repeticoes.length()<=MIN_CHAR){
-            etRepeticoesCliente.setError("Autor invalido");
-            return false;
-        }
-        if (series.length() != MIN_NUMERO){
-            etSeriesCliente.setError("Ano invalido");
-            return false;
-        }
-        return true;
-    }*/
 
 
     @Override
@@ -132,6 +111,7 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
                 Toast.makeText(getApplicationContext(), "Atualizado com sucesso!", Toast.LENGTH_LONG).show();
                 item.setVisible(false);
                 itemEditar.setVisible(true);
+                itemCancelar.setVisible(false);
                 return true;
 
             case R.id.itemCancelar:

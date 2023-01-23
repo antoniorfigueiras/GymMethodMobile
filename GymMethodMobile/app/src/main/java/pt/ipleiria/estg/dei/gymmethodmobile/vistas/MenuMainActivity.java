@@ -136,7 +136,10 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                     setTitle(item.getTitle());}
                 break;
             case R.id.aulas:
-                startActivity(new Intent(this, WeeklyAulasActivity.class));
+                if (!JsonParser.isConnectionInternet(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
+                startActivity(new Intent(this, WeeklyAulasActivity.class));}
                 break;
 
             case R.id.aulasmarcadas:
@@ -145,6 +148,12 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 } else {
                     fragment = new ListaAulasInscritasFragment();
                     setTitle(item.getTitle());}
+                break;
+            case R.id.agua:
+                if (!JsonParser.isConnectionInternet(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(this, WeeklyAguaActivity.class));}
                 break;
         }
         if (fragment != null)

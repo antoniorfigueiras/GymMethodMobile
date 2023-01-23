@@ -13,17 +13,16 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Agua;
-import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Aula;
-import pt.ipleiria.estg.dei.gymmethodmobile.modelos.AulaInscrita;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.CalendarUtils;
+import pt.ipleiria.estg.dei.gymmethodmobile.vistas.CalendarAguaViewHolder;
 import pt.ipleiria.estg.dei.gymmethodmobile.vistas.CalendarViewHolder;
 
-public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
+public class CalendarAguaAdapter extends RecyclerView.Adapter<CalendarAguaViewHolder>
 {
     private final ArrayList<LocalDate> days;
     private final OnItemListener onItemListener;
 
-    public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener)
+    public CalendarAguaAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener)
     {
         this.days = days;
         this.onItemListener = onItemListener;
@@ -31,18 +30,20 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 
     @NonNull
     @Override
-    public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public CalendarAguaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) parent.getHeight();
 
-        return new CalendarViewHolder(view, onItemListener, days);
+        return new CalendarAguaViewHolder(view, onItemListener, days);
     }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull CalendarAguaViewHolder holder, int position)
     {
         final LocalDate date = days.get(position);
         if(date == null)
@@ -61,11 +62,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         return days.size();
     }
 
-    public interface OnItemListener
-    {
+    public interface OnItemListener {
         void onItemClick(int position, LocalDate date);
 
-        void onSetAulas(ArrayList<Aula> listaAulas);
+        void onSetAguas(ArrayList<Agua> listaAguas);
 
     }
 }

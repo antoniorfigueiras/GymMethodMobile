@@ -16,11 +16,13 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAdapter;
+import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAguaAdapter;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.AulasInscritasListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.ConsultasListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
@@ -29,6 +31,7 @@ import pt.ipleiria.estg.dei.gymmethodmobile.listeners.InscricoesListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.LoginListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PerfilListener;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PlanosListener;
+import pt.ipleiria.estg.dei.gymmethodmobile.utils.AguaJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.AulasJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.ConsultaJsonParser;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.InscricoesJsonParser;
@@ -47,12 +50,15 @@ public class SingletonGestorApp {
     private PerfilListener perfilListener;
     private DetalhesExercicioListener detalhesListener;
     private CalendarAdapter.OnItemListener onItemListener;
+    private CalendarAguaAdapter.OnItemListener onItemListenerAgua;
     private InscricoesListener inscricoesListener;
     private AulasInscritasListener aulasInscritasListener;
+
     private User perfils;
 
     private ArrayList<Plano> planos;
     private ArrayList<Aula> aulas;
+    private ArrayList<Agua> aguas;
     private ArrayList<AulaInscrita> aulasInscritas;
     private ArrayList<Exercicio> exercicios;
     private ArrayList<DetalhesExercicio> detalhesExercicioList;
@@ -76,7 +82,10 @@ public class SingletonGestorApp {
     private static final String APIInscreverAula = "http://10.0.2.2/gymmethod/backend/web/api/inscricoes/inscrever/";
     private static final String APIRemoverInscricaoAula = "http://10.0.2.2/gymmethod/backend/web/api/inscricoes/remover-inscricao/";
     private static final String APIGetAulasInscritas = "http://10.0.2.2/gymmethod/backend/web/api/aulas/get-aulas-inscritas";
-    private static final String APIGetInscricoes = "http://10.0.2.2/gymmethod/backend/web/api/inscricoes/get-inscricoes";
+    private static final String APIInserirAgua = "http://10.0.2.2/gymmethod/backend/web/api/agua/adicionar-registo";
+    private static final String APIGetAgua = "http://10.0.2.2/gymmethod/backend/web/api/agua/get-registos";
+    private static final String APIEditarAgua = "http://10.0.2.2/gymmethod/backend/web/api/agua/editar-registo/";
+    private static final String APIRemoverAgua = "http://10.0.2.2/gymmethod/backend/web/api/agua/remover-registo/";
 
     public static synchronized SingletonGestorApp getInstance(Context context) {
         if (instance == null) {
@@ -93,6 +102,10 @@ public class SingletonGestorApp {
         parameterizacaoList = new ArrayList<>();
         BD = new BDHelper(context);
 
+    }
+
+    public void setOnItemListenerAgua(CalendarAguaAdapter.OnItemListener onItemListenerAgua) {
+        this.onItemListenerAgua = onItemListenerAgua;
     }
 
     public void setAulasInscritasListener(AulasInscritasListener aulasInscritasListener) {
@@ -645,6 +658,129 @@ public class SingletonGestorApp {
                         aulasInscritasListener.onRefreshListaAulasInscritas(aulasInscritas);
                     }else if (inscricoesListener != null){
                         inscricoesListener.onGetInscricoes(aulasInscritas);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+
+    public void getAguasAPI(final Context context, String token) {
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, APIGetAgua + "?access-token=" + token, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    aguas = AguaJsonParser.parserJsonAguas(response);
+                    Agua.aguasList = aguas;
+                    if (onItemListenerAgua != null)
+                    {
+                        onItemListenerAgua.onSetAguas(aguas);
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
+    public void adicionarAguaAPI(final Context context, String token, final Agua agua){
+        if (!JsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.POST, APIInserirAgua + "?access-token=" + token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Boolean success = InscricoesJsonParser.parserJsonRemoverInscricao(response);
+                    Agua.aguasList.add(agua);
+                    if (onItemListenerAgua != null)
+                    {
+                        onItemListenerAgua.onSetAguas(Agua.aguasList);
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("descricao", agua.getDescricao());
+                    params.put("valor", agua.getValor()+"");
+                    params.put("data", agua.getData()+"");
+                    params.put("hora", agua.getHora()+"");
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+
+    }
+
+    public void editarRegistoAguaAPI(final Context context, String token, final Agua agua){
+        if (!JsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            StringRequest req = new StringRequest(Request.Method.PUT, APIEditarAgua + agua.getId() + "?access-token=" + token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Agua.aguaEditada(agua);
+                    if (onItemListenerAgua != null)
+                    {
+                        onItemListenerAgua.onSetAguas(Agua.aguasList);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }) {
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("descricao", agua.getDescricao());
+                    params.put("valor", agua.getValor()+"");
+                    params.put("data", agua.getData()+"");
+                    params.put("hora", agua.getHora()+"");
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+
+    }
+
+    public void removerRegistoAguaAPI(final Context context, String token, Agua agua){
+        if (!JsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.DELETE, APIRemoverAgua + agua.getId() + "?access-token=" + token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Agua.removerAgua(agua);
+                    if (onItemListenerAgua != null)
+                    {
+                        onItemListenerAgua.onSetAguas(Agua.aguasList);
                     }
                 }
             }, new Response.ErrorListener() {

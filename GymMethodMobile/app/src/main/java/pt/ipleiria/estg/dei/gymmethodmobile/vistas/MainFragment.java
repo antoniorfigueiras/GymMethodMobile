@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.vistas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -31,7 +32,7 @@ public class MainFragment extends Fragment {
 
         CardView perfil = view.findViewById(R.id.card_perfil);
         CardView plano = view.findViewById(R.id.card_planos);
-        CardView aula = view.findViewById(R.id.card_agua);
+        CardView aula = view.findViewById(R.id.card_aulas);
         CardView consulta = view.findViewById(R.id.card_consultas);
         CardView agua = view.findViewById(R.id.card_agua);
 
@@ -63,6 +64,11 @@ public class MainFragment extends Fragment {
         aula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!JsonParser.isConnectionInternet(getContext())) {
+                    Toast.makeText(getContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(getContext(), WeeklyAulasActivity.class));
+                }
             }
         });
 

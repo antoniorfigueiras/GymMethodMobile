@@ -25,6 +25,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".vistas.DetalhesAguaActivity"
+            android:exported="false"
+            android:parentActivityName=".vistas.WeeklyAguaActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".vistas.DetalhesExercicioActivity"
             android:exported="false"
             android:parentActivityName=".vistas.ListaExerciciosPlanoActivity">
@@ -37,6 +45,15 @@
             android:exported="false"
             android:launchMode="singleTask"
             android:parentActivityName=".vistas.MenuMainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".vistas.WeeklyAguaActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:parentActivityName=".vistas.WeeklyAguaActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

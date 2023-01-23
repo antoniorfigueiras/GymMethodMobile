@@ -45,7 +45,7 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:ems="10"
-        android:inputType="text"/>
+        android:inputType="number"/>
     <TextView
         android:id="@+id/tvData"
         android:layout_width="wrap_content"
@@ -67,17 +67,5 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:textColor="@color/white"/>
-
-    <Button
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/red_700"
-        android:textStyle="bold"
-        android:onClick="inserirRegisto"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
 
 </LinearLayout>

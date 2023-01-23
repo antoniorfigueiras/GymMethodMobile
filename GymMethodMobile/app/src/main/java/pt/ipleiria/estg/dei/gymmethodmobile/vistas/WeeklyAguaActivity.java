@@ -20,40 +20,41 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
+import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.AguaAdapter;
 import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAdapter;
-import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.AulasAdapter;
+import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAguaAdapter;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Agua;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Aula;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.SingletonGestorApp;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.CalendarUtils;
 
-public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
+public class WeeklyAguaActivity extends AppCompatActivity implements CalendarAguaAdapter.OnItemListener
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private ListView lvAulas;
-    private  ArrayList<Aula> dailyAulas;
+    private ListView lvAgua;
     private String token;
-    private Aula aula;
+    private  ArrayList<Agua> dailyAguas;
+    private Agua agua;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weekly_aulas_view);
+        setContentView(R.layout.activity_weekly_agua);
         initWidgets();
         CalendarUtils.selectedDate = LocalDate.now();
         setWeekView();
-        setTitle("Calendario de Aulas");
+        setTitle("Agua");
 
-        SingletonGestorApp.getInstance(getApplicationContext()).setOnItemListener(this);
-        SingletonGestorApp.getInstance(getApplicationContext()).getAulasAPI(getApplicationContext(), token);
+        SingletonGestorApp.getInstance(getApplicationContext()).setOnItemListenerAgua(this);
+        SingletonGestorApp.getInstance(getApplicationContext()).getAguasAPI(getApplicationContext(), token);
 
-        lvAulas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvAgua.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                aula = (Aula) lvAulas.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), InscricaoActivity.class);
-                intent.putExtra("AULA", aula);
+                agua = (Agua) lvAgua.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), DetalhesAguaActivity.class);
+                intent.putExtra("AGUA", agua);
                 startActivityForResult(intent, 1);
             }
         });
@@ -65,19 +66,20 @@ public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAd
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
-        lvAulas = findViewById(R.id.lvAulas);
+        lvAgua = findViewById(R.id.lvAguas);
     }
+
 
     private void setWeekView()
     {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
+        CalendarAguaAdapter calendarAguaAdapter = new CalendarAguaAdapter(days, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
-        setAulaAdpater();
+        calendarRecyclerView.setAdapter(calendarAguaAdapter);
+        setAguaAdpater();
     }
 
     public void previousWeekAction(View view)
@@ -96,37 +98,40 @@ public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAd
     @Override
     public void onItemClick(int position, LocalDate date)
     {
-
         // Definir a data selecionada na variavel do modelo
         CalendarUtils.selectedDate = date;
         setWeekView();
     }
+
+
 
     // Atualizar depois de inserir evento
     @Override
     protected void onResume()
     {
         super.onResume();
-        setAulaAdpater();
+        setAguaAdpater();
     }
 
-    private void setAulaAdpater()
+    private void setAguaAdpater()
     {
+        dailyAguas = Agua.aguasDataSelecionada(CalendarUtils.selectedDate);
+        AguaAdapter aguaAdapter = new AguaAdapter(getApplicationContext(), dailyAguas);
+        lvAgua.setAdapter(aguaAdapter);
+    }
 
-        dailyAulas = Aula.aulasDataSelecionada(CalendarUtils.selectedDate);
-        AulasAdapter aulaAdapter = new AulasAdapter(getApplicationContext(), dailyAulas);
-        lvAulas.setAdapter(aulaAdapter);
+    public void novoRegisto(View view)
+    {
+        startActivity(new Intent(this, AguaActivity.class));
     }
 
     @Override
-    public void onSetAulas(ArrayList<Aula> listaAulas) {
-        if (listaAulas!=null){
-            dailyAulas = listaAulas;
-            setAulaAdpater();
+    public void onSetAguas(ArrayList<Agua> listaAguas) {
+        if (listaAguas!=null){
+            dailyAguas = listaAguas;
+            setAguaAdpater();
         }
     }
-
-
 }
 
 
