@@ -128,6 +128,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 startActivity(intent2);
                 finish();
                 break;
+
         }
         if (fragment != null)
             fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
