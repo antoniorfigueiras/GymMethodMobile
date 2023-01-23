@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black_800"
     android:orientation="horizontal">
 
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="14dp"
         android:layout_weight="0.7"
         android:orientation="vertical">
 
@@ -22,8 +24,10 @@
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Exercicio: "
+                android:layout_height="match_parent"
+                android:text="@string/txt_exercicio"
+                android:textColor="@color/white"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -31,9 +35,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-                android:text="nome" />
+                android:text="@string/txt_exercicio_nome"
+                android:textSize="16dp"
+                android:textColor="@color/white" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +50,9 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Equipamento: "
+                android:text="@string/txt_equipamento"
+                android:textSize="16dp"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,9 +60,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-                android:text="equipamento" />
+                android:textSize="16dp"
+                android:text="@string/txt_equipamento_nome"
+                android:textColor="@color/white" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +75,9 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo: "
+                android:text="@string/txt_tipo"
+                android:textSize="16dp"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -71,10 +85,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-                android:text="tipo" />
+                android:textSize="16dp"
+                android:text="@string/txt_tipo_nome"
+                android:textColor="@color/white" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>

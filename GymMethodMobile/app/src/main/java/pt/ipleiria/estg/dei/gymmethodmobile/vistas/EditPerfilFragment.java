@@ -8,12 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.PerfilListener;
@@ -22,6 +24,7 @@ import pt.ipleiria.estg.dei.gymmethodmobile.modelos.User;
 
 public class EditPerfilFragment extends Fragment implements PerfilListener {
 
+    private NavigationView navigationView;
     private User perfils;
     private String token;
     private FloatingActionButton fabGuardar;

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     android:orientation="vertical"
-    tools:context=".vistas.DetalhesExercicioActivity">
+    tools:context=".vistas.DetalhesExercicioActivity"
+    android:background="@color/black_800">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,21 +16,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/black_800">
 
-            <!--<TextView
-                android:id="@+id/tvNomeExercicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="NomeExercicio"
-                android:textSize="26dp" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/grad">
 
                 <ImageView
                     android:id="@+id/imgExemplo"
@@ -54,15 +49,19 @@
                 android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descrição:"
+                android:text="@string/txt_descricao"
+                android:textSize="16dp"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/tvDescricao"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
+                android:textSize="16dp"
+                android:textColor="@color/white"
                 android:gravity="center"
-                android:text="null" />
+                android:text="@string/txt_descricao_content" />
 
 
         </LinearLayout>
@@ -83,15 +82,19 @@
                     android:id="@+id/tv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Equipamento:"
+                    android:text="@string/txt_equipamento_exercicio"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/tvEquipamento"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:gravity="center"
-                    android:text="null" />
+                    android:text="@string/txt_null" />
 
 
             </LinearLayout>
@@ -111,7 +114,9 @@
                     android:id="@+id/tv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Séries:"
+                    android:text="@string/txt_series"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <TextView
@@ -119,8 +124,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:gravity="center"
-                    android:text="null" />
+                    android:text="@string/txt_null" />
 
                 <View
                     android:layout_width="0dp"
@@ -131,7 +138,9 @@
                     android:id="@+id/tv7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Séries pessoais:"
+                    android:text="@string/txt_series_pessoais"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <EditText
@@ -139,6 +148,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -156,7 +167,9 @@
                     android:id="@+id/tv4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Repetições:"
+                    android:text="@string/txt_repeticoes"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <TextView
@@ -165,7 +178,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
-                    android:text="null" />
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/txt_null" />
 
                 <View
                     android:layout_width="0dp"
@@ -176,7 +191,9 @@
                     android:id="@+id/tv8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Repetições pessoais:"
+                    android:text="@string/txt_repeticoes_pessoais"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <EditText
@@ -184,6 +201,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -201,7 +220,9 @@
                     android:id="@+id/tv5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Peso:"
+                    android:text="@string/txt_peso"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <TextView
@@ -210,7 +231,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
-                    android:text="null" />
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/txt_null" />
 
                 <View
                     android:layout_width="0dp"
@@ -221,7 +244,9 @@
                     android:id="@+id/tv9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Peso pessoal:"
+                    android:text="@string/txt_peso_pessoal"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <EditText
@@ -229,6 +254,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:inputType="number"
                     android:gravity="center" />
 
@@ -250,7 +277,9 @@
                     android:id="@+id/tv6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tempo:"
+                    android:text="@string/txt_tempo"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
 
@@ -259,8 +288,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:text="null"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/txt_null" />
 
                 <View
                     android:layout_width="0dp"
@@ -271,13 +302,17 @@
                     android:id="@+id/tv10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tempo pessoal:"
+                    android:text="@string/txt_tempo_pessoal"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/etTempoCLiente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:layout_marginStart="5dp" />
 
             </LinearLayout>
@@ -290,14 +325,14 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_action_guardar" />
+        app:srcCompat="@drawable/ic_action_guardar" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

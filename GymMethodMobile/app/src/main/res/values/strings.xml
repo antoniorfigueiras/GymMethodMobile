@@ -22,11 +22,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="act_titulo">Detalhes:%1$s</string>
     <string name="menu_perfil">Perfil</string>
-    <string name="txt_menu_planos">Planos</string>
-    <string name="txt_menu_aulas">Aulas</string>
+    <string name="txt_menu_planos">Planos de Treino</string>
+    <string name="txt_menu_aulas">Calendario de Aulas</string>
     <string name="txt_menu_aulas_marcadas">Aulas Marcadas</string>
-<<<<<<< Updated upstream
-=======
     <string name="txt_exercicio_nome">nome</string>
     <string name="txt_exercicio">Exercicio:</string>
     <string name="txt_equipamento">Equipamento:</string>
@@ -73,6 +71,13 @@
     <string name="txt_edit_cidade">Cidade</string>
     <string name="txt_morada">Morada</string>
     <string name="txt_edit_pais">País</string>
->>>>>>> Stashed changes
-
+    <string name="txt_menu_agua">Água</string>
+    <string name="txt_menu_calorias">Calorias</string>
+    <string name="txt_menu_consultas">Marcações</string>
+    <string name="txt_menu_historico_consultas">Historico</string>
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
+    <string name="txt_data">Data:</string>
+    <string name="txt_hora">Hora</string>
+    <string name="txt_status">Status:</string>
 </resources>

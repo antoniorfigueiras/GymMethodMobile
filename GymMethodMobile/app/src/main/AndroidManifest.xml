@@ -9,17 +9,32 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logogymmethod"
+        android:icon="@mipmap/ic_gymmethod"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logogymmethod"
+        android:roundIcon="@mipmap/ic_gymmethod"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymMethodMobile"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".vistas.InscricaoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".vistas.DetalhesExercicioActivity"
             android:exported="false"
             android:parentActivityName=".vistas.ListaExerciciosPlanoActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".vistas.WeeklyAulasActivity"
+            android:exported="false"
+            android:parentActivityName=".vistas.MenuMainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

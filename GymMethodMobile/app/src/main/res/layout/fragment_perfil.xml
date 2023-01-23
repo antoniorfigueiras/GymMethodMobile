@@ -24,7 +24,10 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_margin="9dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="9dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/circle"
                 android:padding="3dp"
@@ -84,13 +87,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-<<<<<<< Updated upstream
-        android:layout_below="@+id/linlay1">
-=======
         android:layout_below="@+id/linlay1"
         android:background="@color/black_800">
->>>>>>> Stashed changes
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,13 +115,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-<<<<<<< Updated upstream
-                    android:text="910733587"
-                    android:textColor="#000000"
-=======
                     android:text="@string/txt_null"
                     android:textColor="#FFFFFF"
->>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
@@ -151,13 +144,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-<<<<<<< Updated upstream
-                    android:text="123456789"
-                    android:textColor="#000000"
-=======
                     android:text="@string/txt_null"
                     android:textColor="#FFFFFF"
->>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
@@ -185,13 +173,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-<<<<<<< Updated upstream
-                    android:text="70"
-                    android:textColor="#000000"
-=======
                     android:text="@string/txt_null"
                     android:textColor="#FFFFFF"
->>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
@@ -219,13 +202,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-<<<<<<< Updated upstream
-                    android:text="180"
-                    android:textColor="#000000"
-=======
                     android:text="@string/txt_null"
                     android:textColor="#FFFFFF"
->>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
@@ -253,13 +231,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-<<<<<<< Updated upstream
-                    android:text="Rua 2 de Abril"
-                    android:textColor="#000000"
-=======
                     android:text="@string/txt_null"
                     android:textColor="#FFFFFF"
->>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View
@@ -287,13 +260,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-<<<<<<< Updated upstream
-                    android:text="2080-640"
-                    android:textColor="#000000"
-=======
                     android:text="@string/txt_null"
                     android:textColor="#FFFFFF"
->>>>>>> Stashed changes
                     android:textSize="18sp" />
 
                 <View

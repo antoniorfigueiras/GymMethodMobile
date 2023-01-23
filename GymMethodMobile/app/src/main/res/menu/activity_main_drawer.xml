@@ -17,29 +17,37 @@
             android:title="@string/txt_menu_planos"
             android:icon="@drawable/ic_menu_planos"
             />
+        <item android:title="Nutricao" >
+            <menu>
+                <item
+                    android:id="@+id/agua"
+                    android:title="@string/txt_menu_agua"
+                    android:icon="@drawable/ic_action_agua"
+                    />
+                <item
+                    android:id="@+id/calorias"
+                    android:title="@string/txt_menu_calorias"
+                    android:icon="@drawable/ic_action_food"
+                    />
+            </menu>
+        </item>
         <item android:title="Aulas" >
             <menu>
                 <item
                     android:id="@+id/aulas"
                     android:title="@string/txt_menu_aulas"
-                    android:icon="@drawable/ic_menu_aulas"
+                    android:icon="@drawable/ic_action_calendar"
                     />
                 <item
                     android:id="@+id/aulasmarcadas"
                     android:title="@string/txt_menu_aulas_marcadas"
-                    android:icon="@drawable/ic_menu_aulas_marcadas"
+                    android:icon="@drawable/ic_action_calendar_edit"
                     />
+
+
 
             </menu>
         </item>
-
-<<<<<<< Updated upstream
-        <item
-            android:id="@+id/contadordeagua"
-            android:title="Água"
-            android:icon="@drawable/ic_action_grid"
-            />
-=======
         <item android:title="" >
             <menu>
                 <item
@@ -60,7 +68,18 @@
 
             </menu>
         </item>
-
->>>>>>> Stashed changes
+        <item android:title="Consultas" >
+            <menu>
+                <item
+                    android:id="@+id/consultas"
+                    android:title="@string/txt_menu_consultas"
+                    android:icon="@drawable/ic_action_calendar_edit"
+                    />
+                <item
+                    android:id="@+id/historico_consultas"
+                    android:title="@string/txt_menu_historico_consultas"
+                    android:icon="@drawable/ic_action_history"
+                    />
+            </menu>
     </group>
 </menu>

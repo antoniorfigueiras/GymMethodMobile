@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:orientation="horizontal">
-
+    android:orientation="horizontal"
+    android:background="@color/black_800">
 
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.7"
+        android:layout_margin="14dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,7 +25,9 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome"
+                android:text="@string/txt_nome"
+                android:textColor="@color/white"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -32,7 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-                android:text="Nome" />
+                android:text="@string/txt_nome_plano"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
 
         </LinearLayout>
 
@@ -45,7 +50,9 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Treinador"
+                android:text="@string/txt_treinador"
+                android:textColor="@color/white"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
 
@@ -54,7 +61,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-                android:text="Treinador" />
+                android:text="@string/txt_treinador_nome"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
 
 
         </LinearLayout>
