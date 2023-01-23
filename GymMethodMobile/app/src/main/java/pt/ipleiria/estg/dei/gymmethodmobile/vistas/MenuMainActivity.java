@@ -138,6 +138,14 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             case R.id.aulas:
                 startActivity(new Intent(this, WeeklyAulasActivity.class));
                 break;
+
+            case R.id.aulasmarcadas:
+                if (!JsonParser.isConnectionInternet(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
+                } else {
+                    fragment = new ListaAulasInscritasFragment();
+                    setTitle(item.getTitle());}
+                break;
         }
         if (fragment != null)
             fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
