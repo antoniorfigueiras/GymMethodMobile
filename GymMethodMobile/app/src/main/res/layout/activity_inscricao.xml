@@ -137,7 +137,8 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btnInscrever"
+                    android:id="@+id/button"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:width="20dp"
@@ -146,12 +147,12 @@
                     app:backgroundTint="@color/red_700" />
 
                 <Button
-                    android:id="@+id/btnRemoverInscricao"
+                    android:id="@+id/button2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="@color/red_700"
-                    android:onClick="onClickRemoverInscricao"
+                    android:onClick="onClickRemover"
                     android:text="Remover inscricao" />
             </LinearLayout>
 

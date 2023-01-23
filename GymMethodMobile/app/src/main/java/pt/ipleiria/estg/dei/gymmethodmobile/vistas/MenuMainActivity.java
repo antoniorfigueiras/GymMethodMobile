@@ -101,7 +101,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             //Inicia o menu principal
             case R.id.menu:
                 fragment = new MainFragment();
-                setTitle("Menu Principal");
+                setTitle("Gym Method");
                 break;
             //Inicia os planos
             case R.id.planos:
@@ -128,15 +128,15 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 startActivity(intent2);
                 finish();
                 break;
-            case R.id.aulas:
-                startActivity(new Intent(this, WeeklyAulasActivity.class));
-                break;
-            case R.id.aulasmarcadas:
+            case R.id.historico_consultas:
                 if (!JsonParser.isConnectionInternet(getApplicationContext())) {
                     Toast.makeText(getApplicationContext(), "Sem ligação á internet", Toast.LENGTH_LONG).show();
                 } else {
-                    fragment = new ListaAulasInscritasFragment();
+                    fragment = new ListaHistoricoConsultasFragment();
                     setTitle(item.getTitle());}
+                break;
+            case R.id.aulas:
+                startActivity(new Intent(this, WeeklyAulasActivity.class));
                 break;
         }
         if (fragment != null)
