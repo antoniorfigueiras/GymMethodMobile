@@ -17,6 +17,11 @@
             android:title="@string/txt_menu_planos"
             android:icon="@drawable/ic_menu_planos"
             />
+        <item
+            android:id="@+id/logout"
+            android:title="@string/txt_logout"
+            android:icon="@drawable/ic_action_logout"
+            />
         <item android:title="Nutricao" >
             <menu>
                 <item
@@ -48,26 +53,7 @@
 
             </menu>
         </item>
-        <item android:title="" >
-            <menu>
-                <item
-                    android:id="@+id/contadordeagua"
-                    android:title="@string/txt_agua"
-                    android:icon="@drawable/ic_action_grid"
-                    />
-                <item
-                    android:id="@+id/consultas"
-                    android:title="@string/txt_consultas"
-                    android:icon="@drawable/ic_baseline_local_hospital_24"
-                    />
-                <item
-                    android:id="@+id/logout"
-                    android:title="@string/txt_logout"
-                    android:icon="@drawable/ic_action_logout"
-                    />
 
-            </menu>
-        </item>
         <item android:title="Consultas" >
             <menu>
                 <item
@@ -81,5 +67,6 @@
                     android:icon="@drawable/ic_action_history"
                     />
             </menu>
+        </item>
     </group>
 </menu>

@@ -33,6 +33,7 @@ public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAd
     private ListView lvAulas;
     private  ArrayList<Aula> dailyAulas;
     private String token;
+    private Aula aula;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -48,8 +49,9 @@ public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAd
         lvAulas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                aula = (Aula) lvAulas.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), InscricaoActivity.class);
-                intent.putExtra("ID_AULA", (int) id);
+                intent.putExtra("AULA", aula);
                 startActivityForResult(intent, 1);
             }
         });

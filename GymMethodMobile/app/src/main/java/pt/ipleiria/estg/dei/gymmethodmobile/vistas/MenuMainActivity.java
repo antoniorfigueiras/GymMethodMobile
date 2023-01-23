@@ -135,6 +135,9 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                     fragment = new ListaHistoricoConsultasFragment();
                     setTitle(item.getTitle());}
                 break;
+            case R.id.aulas:
+                startActivity(new Intent(this, WeeklyAulasActivity.class));
+                break;
         }
         if (fragment != null)
             fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
