@@ -28,8 +28,6 @@ public class AulasAdapter extends ArrayAdapter<Aula> {
         super(context, 0, aulas);
     }
 
-
-
     @Override
     public long getItemId(int position) {
         Aula aula = getItem(position);
@@ -41,7 +39,6 @@ public class AulasAdapter extends ArrayAdapter<Aula> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
         Aula aula = getItem(position);
-        int id = aula.getId();
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_aula, parent, false);
 
