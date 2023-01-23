@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Aula;
+import pt.ipleiria.estg.dei.gymmethodmobile.modelos.AulaInscrita;
 import pt.ipleiria.estg.dei.gymmethodmobile.utils.CalendarUtils;
 import pt.ipleiria.estg.dei.gymmethodmobile.vistas.CalendarViewHolder;
 
@@ -64,5 +65,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         void onItemClick(int position, LocalDate date);
 
         void onSetAulas(ArrayList<Aula> listaAulas);
+
     }
 }
