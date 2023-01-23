@@ -5,33 +5,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Aula implements Serializable
+public class Inscricao implements Serializable
 {
-    public static ArrayList<Aula> aulasList = new ArrayList<>();
-
-    public static ArrayList<Aula> aulasDataSelecionada(LocalDate date)
-    {
-        ArrayList<Aula> aulas = new ArrayList<>();
-
-        for(Aula aula : aulasList)
-        {
-            if(aula.getData().equals(date))
-                aulas.add(aula);
-        }
-
-        return aulas;
-    }
-
-
-    private int id;
+    private int id, inscricao_id;
     private String nome, status;
     private LocalDate data;
     private LocalTime inicio, fim;
 
 
-    public Aula(int id, String nome, LocalDate data, LocalTime inicio, LocalTime fim, String status)
+    public Inscricao(int id, int inscricao_id, String nome, LocalDate data, LocalTime inicio, LocalTime fim, String status)
     {
         this.id = id;
+        this.inscricao_id = inscricao_id;
         this.nome = nome;
         this.data = data;
         this.inicio = inicio;
@@ -45,6 +30,14 @@ public class Aula implements Serializable
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getInscricao_id() {
+        return inscricao_id;
+    }
+
+    public void setInscricao_id(int inscricao_id) {
+        this.inscricao_id = inscricao_id;
     }
 
     public String getNome()

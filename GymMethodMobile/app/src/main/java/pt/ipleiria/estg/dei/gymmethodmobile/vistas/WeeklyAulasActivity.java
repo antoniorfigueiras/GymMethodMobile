@@ -42,6 +42,7 @@ public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAd
         initWidgets();
         CalendarUtils.selectedDate = LocalDate.now();
         setWeekView();
+        setTitle("Calendario de Aulas");
 
         SingletonGestorApp.getInstance(getApplicationContext()).setOnItemListener(this);
         SingletonGestorApp.getInstance(getApplicationContext()).getAulasAPI(getApplicationContext(), token);
@@ -111,7 +112,7 @@ public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAd
     private void setEventAdpater()
     {
 
-        dailyAulas = Aula.eventsForDate(CalendarUtils.selectedDate);
+        dailyAulas = Aula.aulasDataSelecionada(CalendarUtils.selectedDate);
         AulasAdapter eventAdapter = new AulasAdapter(getApplicationContext(), dailyAulas);
         lvAulas.setAdapter(eventAdapter);
     }
