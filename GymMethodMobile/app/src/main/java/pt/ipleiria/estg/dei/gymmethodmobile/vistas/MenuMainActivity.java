@@ -16,10 +16,15 @@ import pt.ipleiria.estg.dei.gymmethodmobile.utils.JsonParser;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +35,11 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private Integer user_id;
     private String token;
-    private String username;
+    private String username, image;
     private FragmentManager fragmentManager;
     public static final String SHARED_USER = "DADOS_USER"; // CHAVE
-    public static final String USER_ID = "ID"; // ID
     public static final String USERNAME = "USER"; // NOME
+    public static final String IMAGE = "IMAGE"; // NOME
     public static final String OPERACAO = "OPERACAO";
     public static final String PASSWORD = "PASSWORD";
     public static final String TOKEN = "TOKEN";
@@ -72,14 +77,13 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void carregarCabecalho() {
-        user_id = getIntent().getIntExtra(USER_ID, 0);
         username = getIntent().getStringExtra(USERNAME);
         token = getIntent().getStringExtra(TOKEN);
+        image = getIntent().getStringExtra(IMAGE);
         SharedPreferences infoUser = getSharedPreferences(SHARED_USER, Context.MODE_PRIVATE);
 
         if (username != null && token != null) {
             SharedPreferences.Editor editor = infoUser.edit();
-            editor.putInt(USER_ID, user_id);
             editor.putString(USERNAME, username);
             editor.putString(TOKEN, token);
             editor.apply();
@@ -90,9 +94,21 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             View headerView = navigationView.getHeaderView(0);
             TextView tvEmail = headerView.findViewById(R.id.tvMainEmail); // Para ir buscar ao cabeçalho do navigation view
             tvEmail.setText(username);
+            ImageView imgPerfil = headerView.findViewById(R.id.imgFoto);
+            Bitmap bm = StringToBitMap(image);
+            imgPerfil.setImageBitmap(bm);
         }
     }
-
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;

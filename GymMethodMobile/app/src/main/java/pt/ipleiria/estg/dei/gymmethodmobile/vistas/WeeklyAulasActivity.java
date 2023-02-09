@@ -70,7 +70,9 @@ public class WeeklyAulasActivity extends AppCompatActivity implements CalendarAd
 
     private void setWeekView()
     {
+        // Mostra a data da variavel formatada com Mes Ano
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        // Dias da semana, datas
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);

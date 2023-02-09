@@ -29,7 +29,8 @@ public class PerfilJsonParser {
             String cidade = perfil.getString("cidade");
             String morada = perfil.getString("morada");
             String codpostal = perfil.getString("codpostal");
-            auxPerfil = new User(user_id, telemovel, altura, nif, peso, nomeproprio, apelido, codpostal, pais, cidade, morada);
+            String imagem = perfil.getString("imagem");
+            auxPerfil = new User(user_id, telemovel, altura, nif, peso, nomeproprio, apelido, codpostal, pais, cidade, morada, imagem);
 
         } catch (JSONException e) {
             e.printStackTrace();

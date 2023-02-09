@@ -1,7 +1,11 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.modelos;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Base64;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -13,6 +17,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 
@@ -21,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAdapter;
 import pt.ipleiria.estg.dei.gymmethodmobile.adaptadores.CalendarAguaAdapter;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.AulasInscritasListener;
@@ -53,7 +59,6 @@ public class SingletonGestorApp {
     private CalendarAguaAdapter.OnItemListener onItemListenerAgua;
     private InscricoesListener inscricoesListener;
     private AulasInscritasListener aulasInscritasListener;
-
     private User perfils;
 
     private ArrayList<Plano> planos;
@@ -282,11 +287,12 @@ public class SingletonGestorApp {
                 @Override
                 public void onResponse(String response) {
                     String token = JsonParser.parserJsonLogin(response);
-                    Integer user_id = JsonParser.parserJsonUser_id(response);
+                    //Integer user_id = JsonParser.parserJsonUser_id(response);
                     String username = JsonParser.parserJsonUsername(response);
+                    String image = JsonParser.parserJsonImage(response);
 
                     if (loginListener != null)
-                        loginListener.onValidateLogin(token, user_id, username, context);
+                        loginListener.onValidateLogin(token, username, context, image);
                 }
 
             }, new Response.ErrorListener() {

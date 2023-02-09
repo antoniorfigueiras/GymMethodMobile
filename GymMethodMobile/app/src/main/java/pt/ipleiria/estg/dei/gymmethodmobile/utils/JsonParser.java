@@ -28,7 +28,7 @@ public class JsonParser {
         }
         return token;
     }
-    public static Integer parserJsonUser_id(String response) {
+    /*public static Integer parserJsonUser_id(String response) {
         Integer user_id = null;
         try {
             JSONObject login = new JSONObject(response);
@@ -42,7 +42,7 @@ public class JsonParser {
             e.printStackTrace();
         }
         return user_id;
-    }
+    }*/
     public static String parserJsonUsername(String response) {
         String username = null;
         try {
@@ -59,7 +59,22 @@ public class JsonParser {
         }
         return username;
     }
+    public static String parserJsonImage(String response) {
+        String image = null;
+        try {
+            JSONObject login = new JSONObject(response);
+            if (login.getBoolean("success")){
+                image = login.getString("image");
+            }
+            else {
+                return image;
+            }
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
     public static Boolean isConnectionInternet(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();

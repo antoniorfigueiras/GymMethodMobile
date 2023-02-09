@@ -40,7 +40,6 @@ public class ListaExerciciosPlanoActivity extends AppCompatActivity implements E
 
         SharedPreferences sharedPreferences = getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
-        user_id =  sharedPreferences.getInt(MenuMainActivity.USER_ID, 0);
         user = sharedPreferences.getString(MenuMainActivity.USERNAME, null);
 
         int plano_id = getIntent().getIntExtra("PLANO_ID", 0);

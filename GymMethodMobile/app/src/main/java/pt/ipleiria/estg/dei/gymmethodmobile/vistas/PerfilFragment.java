@@ -2,12 +2,15 @@ package pt.ipleiria.estg.dei.gymmethodmobile.vistas;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +34,7 @@ public class PerfilFragment extends Fragment implements PerfilListener {
     private String token;
     private FragmentManager fragmentManager;
     private TextView tvNome, tvAltura, tvPeso, tvTelemovel, tvNIF, tvMorada, tvCidade, tvCodPostal;
-
+    private ImageView editar, imgPerfil;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,8 +52,8 @@ public class PerfilFragment extends Fragment implements PerfilListener {
         tvNIF = view.findViewById(R.id.tvNIF);
         tvMorada = view.findViewById(R.id.tvMorada);
         tvCodPostal = view.findViewById(R.id.tvCodPostal);
-        ImageView editar = view.findViewById(R.id.editar);
-
+        editar = view.findViewById(R.id.editar);
+        imgPerfil = view.findViewById(R.id.imgUser);
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
@@ -86,7 +89,20 @@ public class PerfilFragment extends Fragment implements PerfilListener {
             tvNIF.setText(String.valueOf(perfil.getNif()));
             tvMorada.setText(perfil.getMorada());
             tvCodPostal.setText(perfil.getCodpostal());
+            Bitmap bm = StringToBitMap(perfil.getImagem());
+            imgPerfil.setImageBitmap(bm);
             perfils = perfil;
+        }
+    }
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 }

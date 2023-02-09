@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.vistas;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -13,12 +14,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 import pt.ipleiria.estg.dei.gymmethodmobile.R;
 import pt.ipleiria.estg.dei.gymmethodmobile.listeners.DetalhesExercicioListener;
@@ -37,7 +42,7 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
     private ImageView imgExemlo;
     private Menu optionsMenu;
     private MenuItem itemEditar, itemGuardar, itemCancelar;
-
+    private int hour, minute, seconds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +74,6 @@ public class DetalhesExercicioActivity extends AppCompatActivity implements Deta
 
         disableAllEditText();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
