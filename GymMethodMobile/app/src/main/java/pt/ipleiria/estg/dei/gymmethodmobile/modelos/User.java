@@ -3,10 +3,10 @@ package pt.ipleiria.estg.dei.gymmethodmobile.modelos;
 public class User {
     private int user_id, telemovel, altura, nif;
     private double peso;
-    private String nomeproprio, apelido, codpostal, pais, cidade, morada;
+    private String nomeproprio, apelido, codpostal, pais, cidade, morada, imagem;
 
 
-    public User(int user_id, int telemovel, int altura, int nif, double peso, String nomeproprio, String apelido, String codpostal, String pais, String cidade, String morada) {
+    public User(int user_id, int telemovel, int altura, int nif, double peso, String nomeproprio, String apelido, String codpostal, String pais, String cidade, String morada, String imagem) {
         this.user_id = user_id;
         this.telemovel = telemovel;
         this.altura = altura;
@@ -18,6 +18,7 @@ public class User {
         this.pais = pais;
         this.cidade = cidade;
         this.morada = morada;
+        this.imagem = imagem;
     }
 
 
@@ -109,5 +110,11 @@ public class User {
         this.morada = morada;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
 
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 }

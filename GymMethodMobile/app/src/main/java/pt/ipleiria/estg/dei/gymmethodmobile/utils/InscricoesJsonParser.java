@@ -1,17 +1,8 @@
 package pt.ipleiria.estg.dei.gymmethodmobile.utils;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-
-import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Aula;
-import pt.ipleiria.estg.dei.gymmethodmobile.modelos.AulaInscrita;
-import pt.ipleiria.estg.dei.gymmethodmobile.modelos.Inscricao;
 
 
 public class InscricoesJsonParser {
